@@ -82,13 +82,13 @@ export function AboutSection() {
              <Card className="overflow-hidden rounded-xl shadow-xl border-none w-full max-w-md lg:max-w-sm aspect-[4/5]">
                <CardContent className="p-0 h-full">
                   <Image
-                    src="https://picsum.photos/seed/bharat-profile/600/750" // Changed seed for potentially different image
+                    src="https://picsum.photos/seed/bharat-profile/600/750" // Using placeholder
                     alt="Bharat Singh Parihar - Portrait"
                     width={600}
                     height={750}
                     className="object-cover w-full h-full"
                     priority // Load image eagerly as it's important
-                    data-ai-hint="young indian man suit university building background portrait professional student" // Updated hint to match provided image
+                    data-ai-hint="young indian man suit university building background portrait professional student developer" // Refreshed hint
                   />
                </CardContent>
               </Card>
