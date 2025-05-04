@@ -8,8 +8,9 @@ const projects = [
  {
     title: "AI-Driven Image Encryption System",
     description: "Designed a self-adaptive encryption model using CNNs and RNNs, securing images 50% faster than AES-256, tailored for healthcare and IIoT applications.",
-    imageUrl: "https://picsum.photos/seed/encryption/600/400",
-    imageHint: "cyber security abstract",
+    // Update placeholder to represent the user's image
+    imageUrl: "https://picsum.photos/seed/dcgan-encryption-ui/600/400",
+    imageHint: "image encryption user interface dcgan", // Updated hint
     liveUrl: null, // Example: No live demo
     repoUrl: "https://github.com/bharat3645",
     tags: ["PyTorch", "CNN", "RNN", "Security", "Healthcare"]
