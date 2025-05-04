@@ -5,7 +5,7 @@
 ## 🕴️ Meet 3D Bharat
 
 <p align="center">
-  <img src="/image.png" alt="Meet 3D Bharat" width="200"/>
+  <img src="/public/image.png" alt="Meet 3D Bharat" width="200"/>
 </p>
 
 <p align="center"><b>Meet 3D Bharat</b> – Your interactive digital host!</p>
