@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from 'next/image';
-import { ExternalLink, Github } from "lucide-react";
+import { Github } from "lucide-react"; // Removed ExternalLink
 
 // User's project data from resume - UPDATED REPO URLS
 const projects = [
@@ -19,7 +19,7 @@ const projects = [
     description: "Developed a privacy-preserving federated learning system for anomaly detection across complex computing devices.",
     imageUrl: "https://picsum.photos/seed/federated/600/400",
     imageHint: "network anomaly detection",
-    liveUrl: "https://github.com/bharat3645", // Assuming live links are same as repo for now
+    liveUrl: null,
     repoUrl: "https://github.com/bharat3645",
     tags: ["FedML", "TensorFlow", "Privacy", "MLOps", "Security"]
   },
@@ -37,7 +37,7 @@ const projects = [
     description: "Developed and deployed a scalable AI-powered brain tumor detection model using YOLOv8 and PyTorch, achieving high accuracy on MRI scans.",
     imageUrl: "https://picsum.photos/seed/braintumor/600/400",
     imageHint: "mri scan brain ai",
-    liveUrl: "https://github.com/bharat3645",
+    liveUrl: null,
     repoUrl: "https://github.com/bharat3645",
     tags: ["YOLOv8", "PyTorch", "AI", "Medical Imaging", "Docker"]
   },
@@ -46,7 +46,7 @@ const projects = [
     description: "Created an OCR-based system to convert book text into spoken words using PyTesseract and OpenCV, improving accessibility.",
     imageUrl: "https://picsum.photos/seed/ocr/600/400",
     imageHint: "ocr accessibility vision",
-    liveUrl: "https://github.com/bharat3645",
+    liveUrl: null,
     repoUrl: "https://github.com/bharat3645",
     tags: ["OCR", "OpenCV", "Accessibility", "Python", "TTS"]
   },
@@ -55,7 +55,7 @@ const projects = [
     description: "Experimented with APIs (OAuth Access Tokens) and frontend components for a software project using Figma, TypeScript, and React.",
     imageUrl: "https://picsum.photos/seed/aquatrace/600/400",
     imageHint: "software development abstract ui api",
-    liveUrl: "https://github.com/bharat3645",
+    liveUrl: null,
     repoUrl: "https://github.com/bharat3645",
     tags: ["ReactJS", "TypeScript", "API", "UI Design", "Figma", "Firebase"]
   },
@@ -102,25 +102,19 @@ export function ProjectsSection() {
                  </div>
               </CardContent>
               {/* Footer with conditional rendering for buttons */}
-              <CardFooter className="p-6 pt-0 mt-auto flex justify-end space-x-3 bg-secondary/30 rounded-b-lg">
-                {project.repoUrl && (
+              <CardFooter className="p-6 pt-0 mt-auto flex justify-end bg-secondary/30 rounded-b-lg">
+                {project.repoUrl ? (
                     <Button variant="outline" size="sm" asChild className="text-muted-foreground hover:text-primary hover:border-primary/50 hover:bg-primary/5">
                     <a href={project.repoUrl} target="_blank" rel="noopener noreferrer">
                         <Github className="mr-2 h-4 w-4" /> Code
                     </a>
                     </Button>
-                )}
-                {project.liveUrl ? (
-                    <Button size="sm" asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
-                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
-                    </a>
-                    </Button>
                 ) : (
-                     <Button size="sm" disabled variant="outline" className="text-muted-foreground/50 border-muted-foreground/20 cursor-not-allowed">
-                       <ExternalLink className="mr-2 h-4 w-4" /> No Demo
+                    <Button size="sm" disabled variant="outline" className="text-muted-foreground/50 border-muted-foreground/20 cursor-not-allowed">
+                       <Github className="mr-2 h-4 w-4" /> No Code
                      </Button>
-                )}
+                ) }
+                {/* Removed Live Demo Button */}
               </CardFooter>
             </Card>
           ))}
