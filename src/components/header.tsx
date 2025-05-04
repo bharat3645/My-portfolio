@@ -2,15 +2,16 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { CodeXml } from 'lucide-react';
+import { CodeXml, Database } from 'lucide-react'; // Using Database as a placeholder for Data Science/AI
 
 export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center">
         <Link href="/" className="mr-6 flex items-center space-x-2">
-          <CodeXml className="h-6 w-6 text-primary" />
-          <span className="font-bold hidden sm:inline-block">Portfolio Pro 3D</span>
+          {/* Using Database icon as a placeholder for Data Science focus */}
+          <Database className="h-6 w-6 text-primary" />
+          <span className="font-bold hidden sm:inline-block">Bharat Singh Parihar</span>
         </Link>
         <nav className="flex flex-1 items-center space-x-4 justify-end">
           <Link href="#projects" passHref>
@@ -18,6 +19,9 @@ export function Header() {
           </Link>
           <Link href="#about" passHref>
             <Button variant="ghost">About</Button>
+          </Link>
+          <Link href="#experience" passHref>
+             <Button variant="ghost">Experience</Button>
           </Link>
           <Link href="#tailor" passHref>
              <Button variant="ghost">AI Tailor</Button>

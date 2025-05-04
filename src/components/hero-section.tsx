@@ -8,10 +8,10 @@ export function HeroSection() {
       <div className="container px-4 md:px-6 grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
         <div className="space-y-4 z-10">
           <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-primary">
-            Jane Doe: Creative Developer & Designer
+            Bharat Singh Parihar: Data Scientist & AI Enthusiast
           </h1>
           <p className="max-w-[600px] text-muted-foreground md:text-xl">
-            Passionate about crafting beautiful and functional web experiences. Explore my work and get in touch!
+            A passionate Computer Science undergraduate specializing in Data Science, driven to leverage advanced machine learning, full-stack development, and cloud technologies to solve real-world problems and contribute to impactful research.
           </p>
           <div className="flex flex-col gap-2 min-[400px]:flex-row">
             <Link href="#projects" passHref>

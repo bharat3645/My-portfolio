@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Mail, Linkedin, Github } from 'lucide-react'; // Example icons
+import { Mail, Linkedin, Github, Phone } from 'lucide-react'; // Added Phone icon
 
 export function ContactSection() {
   // In a real app, you'd handle form submission here (e.g., using Server Actions or an API route)
@@ -15,6 +15,7 @@ export function ContactSection() {
     console.log("Email:", formData.get('email'));
     console.log("Message:", formData.get('message'));
     // Add logic to send email or save to database
+     // You might want to add a success/error message feedback here using useToast
   };
 
   return (
@@ -24,18 +25,22 @@ export function ContactSection() {
            <div className="space-y-4">
              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-primary">Get In Touch</h2>
              <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed">
-              Have a project in mind, want to collaborate, or just say hi? Feel free to reach out!
+              Interested in collaborating, have a question, or just want to connect? Feel free to reach out!
              </p>
               <div className="space-y-4 pt-4">
-                 <a href="mailto:your.email@example.com" className="flex items-center space-x-3 group">
+                 <a href="mailto:bharat5160@gmail.com" className="flex items-center space-x-3 group">
                      <Mail className="w-6 h-6 text-accent transition-transform group-hover:scale-110" />
-                     <span className="text-muted-foreground group-hover:text-foreground">your.email@example.com</span>
+                     <span className="text-muted-foreground group-hover:text-foreground">bharat5160@gmail.com</span>
                  </a>
-                 <a href="#" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 group">
+                  <div className="flex items-center space-x-3 group">
+                     <Phone className="w-6 h-6 text-accent " />
+                     <span className="text-muted-foreground">+91 9413770981</span>
+                 </div>
+                 <a href="https://www.linkedin.com/in/bharat-singh-parihar/" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 group">
                       <Linkedin className="w-6 h-6 text-accent transition-transform group-hover:scale-110" />
                      <span className="text-muted-foreground group-hover:text-foreground">LinkedIn Profile</span>
                  </a>
-                  <a href="#" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 group">
+                  <a href="https://github.com/bharat516" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 group">
                       <Github className="w-6 h-6 text-accent transition-transform group-hover:scale-110" />
                      <span className="text-muted-foreground group-hover:text-foreground">GitHub Profile</span>
                  </a>

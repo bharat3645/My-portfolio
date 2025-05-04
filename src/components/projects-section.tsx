@@ -3,34 +3,61 @@ import { Button } from "@/components/ui/button";
 import Image from 'next/image';
 import { ExternalLink, Github } from "lucide-react";
 
-// Sample project data (replace with your actual projects)
+// User's project data from resume
 const projects = [
-  {
-    title: "Project Alpha",
-    description: "An innovative web application using Next.js and Tailwind CSS.",
-    imageUrl: "https://picsum.photos/seed/alpha/600/400",
-    imageHint: "technology abstract",
-    liveUrl: "#", // Replace with actual URL
-    repoUrl: "#", // Replace with actual URL
-    tags: ["Next.js", "Tailwind CSS", "TypeScript"]
+ {
+    title: "AI-Driven Image Encryption System",
+    description: "Designed a self-adaptive encryption model using CNNs and RNNs, securing images 50% faster than AES-256, tailored for healthcare and IIoT applications.",
+    imageUrl: "https://picsum.photos/seed/encryption/600/400",
+    imageHint: "cyber security abstract",
+    liveUrl: "https://github.com/bharat516",
+    repoUrl: "https://github.com/bharat516",
+    tags: ["PyTorch", "YOLOv8", "LSTM", "AWS", "Raspberry Pi", "CNN", "RNN"]
   },
   {
-    title: "Project Beta",
-    description: "Interactive data visualization dashboard built with React and D3.",
-    imageUrl: "https://picsum.photos/seed/beta/600/400",
-    imageHint: "data visualization chart",
-    liveUrl: "#",
-    repoUrl: "#",
-    tags: ["React", "D3.js", "Data Viz"]
+    title: "Federated Learning for Anomaly Detection",
+    description: "Developed a federated learning system for anomaly detection across complex computing devices, ensuring privacy and efficiency.",
+    imageUrl: "https://picsum.photos/seed/federated/600/400",
+    imageHint: "network anomaly detection",
+    liveUrl: "https://github.com/bharat516",
+    repoUrl: "https://github.com/bharat516",
+    tags: ["FedML", "TensorFlow Federated", "TLS", "Machine Learning"]
+  },
+   {
+    title: "DeepFake Detection",
+    description: "Focused on distinguishing real faces from fakes (e.g., deep fakes) using a fine-tuned CNN model. Integrated Multi-Criteria Decision-Making (MCDM) for enhanced accuracy.",
+    imageUrl: "https://picsum.photos/seed/deepfake/600/400",
+    imageHint: "ai face recognition",
+    liveUrl: "https://github.com/bharat516",
+    repoUrl: "https://github.com/bharat516",
+    tags: ["CNN", "MCDM", "NumPy", "TensorFlow", "Keras", "Python"]
   },
   {
-    title: "Project Gamma",
-    description: "A 3D modeling experiment using Three.js exploring creative geometry.",
-    imageUrl: "https://picsum.photos/seed/gamma/600/400",
-    imageHint: "3d render abstract",
-    liveUrl: "#",
-    repoUrl: "#",
-    tags: ["Three.js", "WebGL", "3D"]
+    title: "Brain-Tumor Detection Model",
+    description: "Developed and deployed a scalable AI-powered brain tumor detection model using YOLOv8 and PyTorch, achieving 89% accuracy on MRI scans and reducing false positives by 15%.",
+    imageUrl: "https://picsum.photos/seed/braintumor/600/400",
+    imageHint: "mri scan brain ai",
+    liveUrl: "https://github.com/bharat516",
+    repoUrl: "https://github.com/bharat516",
+    tags: ["YOLOv8", "PyTorch", "CUDA", "OpenCV", "Scikit-learn", "Docker", "Seaborn"]
+  },
+   {
+    title: "Book Detection for Visually Impaired",
+    description: "Created an OCR-based system to convert book text into spoken words using PyTesseract and OpenCV, significantly improving accessibility for the visually impaired.",
+    imageUrl: "https://picsum.photos/seed/ocr/600/400",
+    imageHint: "ocr accessibility vision",
+    liveUrl: "https://github.com/bharat516",
+    repoUrl: "https://github.com/bharat516",
+    tags: ["PyTesseract", "OpenCV", "ImageMagick", "Python", "Legionica"]
+  },
+  {
+    title: "AquaTrace Software",
+    description: "Experimented with APIs (OAuth Access Tokens) to get data from the given pipeline for a software project involving Figma, TypeScript, and React.",
+    imageUrl: "https://picsum.photos/seed/aquatrace/600/400",
+    imageHint: "software development abstract",
+    liveUrl: "https://github.com/bharat516",
+    repoUrl: "https://github.com/bharat516",
+    tags: ["Figma", "TypeScript", "HTML/CSS", "ReactJS", "Webpack", "Git", "Firebase"]
   },
 ];
 
@@ -41,7 +68,7 @@ export function ProjectsSection() {
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-primary">My Projects</h2>
           <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Here are some of the projects I've worked on, showcasing my skills in development and design.
+            A selection of projects showcasing my skills in AI, Machine Learning, Full-Stack Development, and Data Science.
           </p>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -52,8 +79,8 @@ export function ProjectsSection() {
                   <Image
                     src={project.imageUrl}
                     alt={project.title}
-                    layout="fill"
-                    objectFit="cover"
+                    fill={true} /* Changed layout to fill */
+                    style={{objectFit: 'cover'}} /* Added objectFit */
                     data-ai-hint={project.imageHint}
                     className="transition-transform duration-300 ease-in-out group-hover:scale-105"
                   />

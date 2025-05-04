@@ -5,6 +5,7 @@ import { ContactSection } from '@/components/contact-section';
 import { AiTailorSection } from '@/components/ai-tailor-section';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
+import { ExperienceSection } from '@/components/experience-section'; // Import ExperienceSection
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <HeroSection />
         <ProjectsSection />
         <AboutSection />
+        <ExperienceSection /> {/* Add ExperienceSection */}
         <AiTailorSection />
         <ContactSection />
       </main>

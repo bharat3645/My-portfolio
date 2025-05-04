@@ -9,39 +9,70 @@ import { Button } from "@/components/ui/button";
 import { Loader2, Wand2 } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 
+// Updated initial content based on Bharat Singh Parihar's resume
 const initialPortfolioContent = `
-## Jane Doe - Creative Developer & Designer
+## Bharat Singh Parihar - Computer Science Student (Data Science Specialization)
+
+**Contact:** +91 9413770981 | bharat5160@gmail.com | github.com/bharat516 | linkedin.com/in/bharat-singh-parihar/
 
 **Summary:**
-Passionate and results-oriented Creative Developer with 5+ years of experience specializing in front-end development, UI/UX design, and interactive web applications. Proven ability to translate complex requirements into intuitive and visually appealing user interfaces. Seeking challenging projects where I can leverage my skills in React, Next.js, Three.js, and modern web technologies.
-
-**Experience:**
-
-**Senior Front-End Developer | Tech Solutions Inc. | 2020 - Present**
-- Led the development of key features for the company's flagship product using React and TypeScript.
-- Collaborated with designers and back-end engineers to implement responsive and accessible UI components.
-- Mentored junior developers and contributed to code reviews and best practices.
-- Integrated Three.js for interactive 3D product visualizations.
-
-**Web Developer & Designer | Creative Agency | 2018 - 2020**
-- Designed and developed websites for various clients across different industries.
-- Focused on creating engaging user experiences with HTML, CSS, JavaScript, and WordPress.
-- Managed client communication and project timelines.
-
-**Skills:**
-- **Front-End:** React, Next.js, JavaScript (ES6+), TypeScript, HTML5, CSS3, Tailwind CSS, SASS/LESS
-- **3D & Graphics:** Three.js, WebGL
-- **Design:** Figma, Adobe XD, UI/UX Principles, Responsive Design, Accessibility (WCAG)
-- **Tools:** Git, Docker, Webpack, Jira
-- **Other:** Node.js (Basic), REST APIs
-
-**Projects:**
-- Project Alpha: [Brief Description]
-- Project Beta: [Brief Description]
-- Project Gamma: [Brief Description]
+I'm a Computer Science undergraduate student specializing in Data Science, deeply passionate about using technology to solve real-world problems. With experience in creating advanced machine learning applications and predictive analytics tools. My leadership roles in IEEE and CSI, coupled with successful participation in hackathons, have honed my collaborative and innovative skills. I am integrating AI, cloud computing, and cutting-edge technologies to contribute meaningfully while expanding my expertise through impactful research.
 
 **Education:**
-- Bachelor of Science in Computer Science | University of Technology | 2018
+- **Symbiosis Institute of Technology, Nagpur, India**
+  - B.Tech (Hons.) CSE Core Data Science (CGPA: 7.85/10.00) | Expected 2026
+- **Kendriya Vidyalaya, Dahi Chowki, Unnao**
+  - SSC, PCM with Computer Science (Percentage: 87.44%) | 2022
+
+**Skills:**
+- **Programming and Development:** C/C++, Python, Java, R, Scala, JavaScript/TypeScript, SQL, Flutter, ReactJS, NodeJS, ShadCN, Flask, FastAPI, WordPress, Material UI, Agile Development
+- **AI & ML:** TensorFlow, PyTorch, Keras, YOLOv8, Matplotlib, Seaborn, NumPy, Pandas, Scikit-Learn, PyCaret, NLTK, SciPy, OpenCV, PyTesseract, ImageMagick, Legionica, CNNs, Caffe, Darknet, MLDps, APL
+- **Tools:** Git, GitHub, UnixShell, Anaconda, PowerBI, AutoCAD, IBM SPSS, MS Excel, Figma, IntelliJ
+- **Cloud & Data Management:** Google Cloud, Amazon AWS, Docker, Kubernetes, Firebase, MySQL, EC2
+
+**Professional Experience:**
+
+**PGDAV College – University of Delhi | Summer Research Intern | May 2024 – July 2024**
+- Developed a CNN-based deep learning model for real vs. fake face distinction, achieving 83% accuracy.
+- Integrated Multi-Criteria Decision-Making (MCDM) for enhanced decision precision.
+
+**Kadacy | Student Intern | Jan 2023 – Feb 2023**
+- Conducted simulations to guide robotic prototyping, improving efficiency by 15%.
+
+**Projects:** (See Projects Section for details)
+- AI-Driven Image Encryption System (Feb 2025 - Present)
+- Federated Learning for Anomaly Detection (Jan 2025 - Present)
+- DeepFake Detection (May 2024 - Jul 2024)
+- Brain-Tumor Detection Model (Dec 2023)
+- Book Detection for Visually Impaired (Feb 2024 - Jun 2024)
+- AquaTrace Software (Aug 2023 - Oct 2023)
+
+**Achievements & Awards:**
+- Winner, GDSC Hackathon (2023)
+- 3rd Place, IEEE Research Hackathon (2023)
+- 4th Place, CyberHack Maha Hackathon (2023)
+
+**Publications:**
+1. B. S. Parihar, et al., Integration of Computer Vision for Book Detection and Text-to-Speech Conversion, IEEE ICISCT 2024, Kookmin University, Korea (SCOPUS)
+2. B. S. Parihar, et al., The Impact of Digitalization on Psychological Treatment, IEEE ICISCT 2024, Kookmin University, Korea (SCOPUS)
+3. B. S. Parihar, et al., Realtime Cryptojacking in Advanced mobile devices, IEEE ICIPCT 2025, Amity University, Noida, India (SCOPUS)
+4. B. S. Parihar, et al., Revolutionizing Industry 4.0: Multi-Level Federated Learning for Dynamic Ecosystem (Book Chapter) 2025
+5. B. S. Parihar, et al., AI and Forecasting for Renewable Energy Generation – (Book Chapter) 2025
+
+**Certifications:**
+- Fundamental of Deep Learning (NVIDIA)
+- Fundamental of Accelerated Computing with Cuda C (NVIDIA)
+- Cloud Data Engineer (Google)
+- Accelerating CUDA C applications with Multiple GPUs (NVIDIA)
+- SQL (Basic, Intermediate, Advance) (HackerRank)
+- SDE Intern (HackerRank)
+- Machine Learning Specialization (Stanford University)
+
+**Leadership Experience:**
+- **Computer Society of India (CSI) Student Chapter:** Chair (Dec 2024 - Present)
+- **SITNavate 24 Hours Hackathon:** Organizer (19, 20 Feb 2025)
+- **Computer Society of India (CSI) Student Chapter:** Founder Vice Chair (July 2024 - Nov 2024)
+- **IEEE Student Chapter:** Core Member (Dec 2023 - Jun 2024)
 `;
 
 
@@ -66,7 +97,7 @@ export function AiTailorSection() {
       try {
         const input: TailorPortfolioInput = {
           jobDescription,
-          portfolioContent,
+          portfolioContent, // Use the potentially updated portfolio content state
         };
         const result: TailorPortfolioOutput = await tailorPortfolio(input);
         setTailoredContent(result.tailoredContent);
