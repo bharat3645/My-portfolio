@@ -95,7 +95,7 @@ export function ProjectsSection() {
                  {/* Tags with accent color */}
                  <div className="flex flex-wrap gap-2 mb-4 pt-2 border-t border-border/50">
                    {project.tags.map(tag => (
-                      <span key={tag} className="text-xs bg-accent/10 text-accent-foreground font-medium px-2.5 py-1 rounded-full border border-accent/30">
+                      <span key={tag} className="text-xs bg-accent/10 text-accent font-medium px-2.5 py-1 rounded-full border border-accent/30">
                           {tag}
                       </span>
                    ))}
