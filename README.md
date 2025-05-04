@@ -1,5 +1,17 @@
 # Portfolio Pro 3D
 
+---
+
+## 🕴️ Meet 3D Bharat
+
+<p align="center">
+  <img src="/3d-bharat.png" alt="Meet 3D Bharat" width="200"/>
+</p>
+
+<p align="center"><b>Meet 3D Bharat</b> – Your interactive digital host!</p>
+
+---
+
 A visually stunning, interactive, and AI-powered portfolio website built with Next.js, React, and Three.js. This project is designed to help you showcase your skills, projects, and experience in a modern, engaging way—even if you are a complete beginner.
 
 ---
