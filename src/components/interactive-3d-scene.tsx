@@ -16,50 +16,81 @@ export function Interactive3DScene() {
     scene.background = null; // Transparent background
 
     const camera = new THREE.PerspectiveCamera(
-      75,
+      60, // Slightly reduced FOV
       currentMount.clientWidth / currentMount.clientHeight,
       0.1,
       1000
     );
-    camera.position.z = 5;
+    camera.position.z = 6; // Moved camera back slightly
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); // Enable alpha for transparency
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
+    // Enable shadows for more realism
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     currentMount.appendChild(renderer.domElement);
 
-    // Geometry (Using Icosahedron for a slightly complex shape)
-    const geometry = new THREE.IcosahedronGeometry(1.5, 0); // Radius 1.5, detail 0
+    // Geometry (Using TorusKnot for a smoother, more "designed" shape)
+    const geometry = new THREE.TorusKnotGeometry(1.2, 0.4, 100, 16); // Parameters tuned for aesthetics
 
-    // Material (Using MeshStandardMaterial for better lighting effects)
-    const material = new THREE.MeshStandardMaterial({
-      color: 0x26A69A, // Teal accent color
-      metalness: 0.3,
-      roughness: 0.6,
-      wireframe: false, // Set to true for wireframe effect
+    // Material (Using MeshPhysicalMaterial for advanced properties like clearcoat and transmission)
+    const material = new THREE.MeshPhysicalMaterial({
+        color: 0x5B8DEF, // Updated to primary theme color (hsl(217, 33%, 50%))
+        metalness: 0.1,
+        roughness: 0.2,
+        clearcoat: 0.8, // Add a clear coat layer
+        clearcoatRoughness: 0.2,
+        transmission: 0.1, // Slight transparency/light transmission
+        ior: 1.5, // Index of refraction
+        reflectivity: 0.4,
+        wireframe: false, // Keep wireframe off for solid look
     });
 
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
 
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8); // Soft white light
-    scene.add(ambientLight);
+    const shape = new THREE.Mesh(geometry, material);
+    shape.castShadow = true; // Allow shape to cast shadows
+    shape.receiveShadow = true; // Allow shape to receive shadows
+    scene.add(shape);
 
-    const pointLight = new THREE.PointLight(0xffffff, 1.5, 100);
-    pointLight.position.set(5, 5, 5);
+    // Lighting (Refined lighting setup for a softer, more professional look)
+    scene.add(new THREE.AmbientLight(0xffffff, 1.0)); // Increased ambient light slightly
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    directionalLight.position.set(5, 10, 7.5);
+    directionalLight.castShadow = true; // Enable shadow casting
+    // Configure shadow properties for better quality
+    directionalLight.shadow.mapSize.width = 1024;
+    directionalLight.shadow.mapSize.height = 1024;
+    directionalLight.shadow.camera.near = 0.5;
+    directionalLight.shadow.camera.far = 50;
+    scene.add(directionalLight);
+
+    const pointLight = new THREE.PointLight(0xffffff, 0.8, 100);
+    pointLight.position.set(-5, -5, -5);
     scene.add(pointLight);
 
-    const pointLight2 = new THREE.PointLight(0xffffff, 0.8, 100);
-    pointLight2.position.set(-5, -5, -5);
-    scene.add(pointLight2);
+    // Optional: Add a ground plane to receive shadows if desired
+    // const planeGeometry = new THREE.PlaneGeometry(20, 20);
+    // const planeMaterial = new THREE.ShadowMaterial({ opacity: 0.3 }); // Material that only receives shadows
+    // const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+    // plane.rotation.x = -Math.PI / 2;
+    // plane.position.y = -2.5; // Adjust position below the shape
+    // plane.receiveShadow = true;
+    // scene.add(plane);
+
 
     // Animation loop
+    let targetRotation = { x: 0, y: 0 };
     const animate = () => {
       requestAnimationFrame(animate);
 
-      cube.rotation.x += 0.005;
-      cube.rotation.y += 0.005;
+      // Smooth rotation towards target
+      shape.rotation.x += (targetRotation.x - shape.rotation.x) * 0.05;
+      shape.rotation.y += (targetRotation.y - shape.rotation.y) * 0.05;
+
+      // Subtle continuous rotation
+      shape.rotation.y += 0.002;
 
       renderer.render(scene, camera);
     };
@@ -77,9 +108,10 @@ export function Interactive3DScene() {
     };
     window.addEventListener('resize', handleResize);
 
-    // Mouse interaction for rotation
+    // Mouse interaction for rotation - update targetRotation instead of direct rotation
     let isDragging = false;
     let previousMousePosition = { x: 0, y: 0 };
+    const rotationSpeed = 0.008; // Adjust speed
 
     const onMouseDown = (event: MouseEvent) => {
       isDragging = true;
@@ -94,9 +126,8 @@ export function Interactive3DScene() {
         y: event.clientY - previousMousePosition.y,
       };
 
-      const rotateSpeed = 0.005;
-      cube.rotation.y += deltaMove.x * rotateSpeed;
-      cube.rotation.x += deltaMove.y * rotateSpeed;
+      targetRotation.y += deltaMove.x * rotationSpeed;
+      targetRotation.x += deltaMove.y * rotationSpeed;
 
       previousMousePosition = { x: event.clientX, y: event.clientY };
     };
@@ -106,8 +137,8 @@ export function Interactive3DScene() {
     };
 
     currentMount.addEventListener('mousedown', onMouseDown);
-    window.addEventListener('mousemove', onMouseMove); // Listen on window to track mouse outside element
-    window.addEventListener('mouseup', onMouseUp); // Listen on window
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
 
     // Cleanup on unmount
     return () => {
@@ -116,7 +147,6 @@ export function Interactive3DScene() {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mouseup', onMouseUp);
       if (currentMount && renderer.domElement) {
-         // Check if currentMount is still valid before removing child
         try {
             currentMount.removeChild(renderer.domElement);
         } catch (e) {
@@ -127,6 +157,10 @@ export function Interactive3DScene() {
       geometry.dispose();
       material.dispose();
       renderer.dispose();
+      directionalLight.dispose();
+      pointLight.dispose();
+      // if (planeGeometry) planeGeometry.dispose();
+      // if (planeMaterial) planeMaterial.dispose();
     };
   }, []); // Empty dependency array ensures this runs once on mount
 

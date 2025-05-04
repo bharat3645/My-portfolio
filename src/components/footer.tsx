@@ -1,23 +1,47 @@
-import { Github } from "lucide-react"; // Import Github icon
+import { Github, Linkedin, Mail } from "lucide-react"; // Added Linkedin and Mail
 
 export function Footer() {
   const currentYear = new Date().getFullYear(); // Get current year dynamically
 
   return (
-    <footer className="py-6 md:px-8 md:py-0 bg-secondary text-secondary-foreground">
-      <div className="container flex flex-col items-center justify-center gap-4 md:h-24 md:flex-row md:justify-between">
-        <p className="text-center text-sm leading-loose md:text-left">
-          &copy; {currentYear} Bharat Singh Parihar. All rights reserved.
+    <footer className="py-8 md:py-10 bg-secondary/50 border-t border-border/40 text-secondary-foreground">
+      <div className="container flex flex-col items-center justify-center gap-6 md:flex-row md:justify-between">
+        <p className="text-center text-xs md:text-sm leading-loose text-muted-foreground">
+          &copy; {currentYear} Bharat Singh Parihar. Designed & Built with Passion.
         </p>
-        <a
-          href="https://github.com/bharat516"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <Github className="w-4 h-4" />
-          View Source on GitHub
-        </a>
+        {/* Social Links */}
+        <div className="flex items-center gap-4">
+            <a
+             href="mailto:bharat5160@gmail.com"
+             aria-label="Email Bharat"
+             target="_blank"
+             rel="noopener noreferrer"
+             className="text-muted-foreground hover:text-primary transition-colors duration-200"
+            >
+                <Mail className="w-5 h-5"/>
+                <span className="sr-only">Email</span>
+            </a>
+             <a
+             href="https://github.com/bharat516"
+             aria-label="Bharat's GitHub Profile"
+             target="_blank"
+             rel="noopener noreferrer"
+             className="text-muted-foreground hover:text-primary transition-colors duration-200"
+             >
+                <Github className="w-5 h-5" />
+                <span className="sr-only">GitHub</span>
+             </a>
+             <a
+             href="https://www.linkedin.com/in/bharat-singh-parihar/"
+             aria-label="Bharat's LinkedIn Profile"
+             target="_blank"
+             rel="noopener noreferrer"
+             className="text-muted-foreground hover:text-primary transition-colors duration-200"
+             >
+                <Linkedin className="w-5 h-5" />
+                 <span className="sr-only">LinkedIn</span>
+             </a>
+        </div>
       </div>
     </footer>
   );

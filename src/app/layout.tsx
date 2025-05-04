@@ -1,16 +1,22 @@
 import type {Metadata} from 'next';
+import { Inter, Poppins } from 'next/font/google'; // Import Google Fonts
 import { Toaster } from "@/components/ui/toaster"
 import './globals.css';
 
-const inter = { // Updated font name
-  variable: '--font-inter',
+// Configure fonts
+const inter = Inter({
   subsets: ['latin'],
-};
+  variable: '--font-inter', // Define CSS variable for Inter
+  display: 'swap',
+});
 
-const mono = {
-  variable: '--font-mono',
+const poppins = Poppins({
   subsets: ['latin'],
-};
+  weight: ['400', '600', '700'], // Load necessary weights
+  variable: '--font-poppins', // Define CSS variable for Poppins
+  display: 'swap',
+});
+
 
 export const metadata: Metadata = {
   title: 'Bharat Singh Parihar - Portfolio',
@@ -23,13 +29,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${mono.variable} antialiased`}>
+    <html lang="en" className={`${inter.variable} ${poppins.variable}`}> {/* Apply font variables to HTML tag */}
+      <body className={`antialiased`}> {/* Removed font classes from body, applied via HTML */}
         {children}
         <Toaster />
       </body>
     </html>
   );
 }
-
-

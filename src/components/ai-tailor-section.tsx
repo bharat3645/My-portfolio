@@ -6,10 +6,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Loader2, Wand2 } from 'lucide-react';
+import { Loader2, Wand2, Sparkles } from 'lucide-react'; // Added Sparkles
 import { useToast } from "@/hooks/use-toast";
 
-// Updated initial content based on Bharat Singh Parihar's resume
+// Using the existing initial content
 const initialPortfolioContent = `
 ## Bharat Singh Parihar - Computer Science Student (Data Science Specialization)
 
@@ -94,69 +94,71 @@ export function AiTailorSection() {
     }
 
     startTransition(async () => {
+      setTailoredContent(''); // Clear previous output immediately
       try {
         const input: TailorPortfolioInput = {
           jobDescription,
-          portfolioContent, // Use the potentially updated portfolio content state
+          portfolioContent,
         };
         const result: TailorPortfolioOutput = await tailorPortfolio(input);
         setTailoredContent(result.tailoredContent);
          toast({
            title: "Portfolio Tailored!",
            description: "AI has suggested tailored content below.",
+           variant: "default", // Use default variant for success
          });
       } catch (error) {
         console.error("Error tailoring portfolio:", error);
         toast({
-          title: "Error",
-          description: "Failed to tailor portfolio content. Please try again.",
+          title: "AI Tailoring Error",
+          description: "Failed to generate tailored content. The AI might be busy or encountered an issue. Please try again.",
           variant: "destructive",
         });
-        setTailoredContent('Error generating tailored content.');
+        setTailoredContent('// Error generating tailored content. Please check the console or try again.');
       }
     });
   };
 
   return (
-    <section id="tailor" className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
+    <section id="tailor" className="w-full py-16 md:py-24 lg:py-32 bg-gradient-to-b from-secondary/50 to-background"> {/* Gradient background */}
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-          <Wand2 className="h-10 w-10 text-primary" />
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-primary">AI Portfolio Tailor</h2>
+          <Sparkles className="h-10 w-10 text-primary animate-pulse" /> {/* Animated Icon */}
+          <h2 className="font-poppins text-3xl font-bold tracking-tighter sm:text-5xl text-foreground">AI Portfolio Tailor</h2>
           <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Paste a job description below, and let AI help you highlight the most relevant skills and experiences from your portfolio.
+            Paste a job description below. The AI will analyze it and rewrite your portfolio content to highlight the most relevant skills and experiences, helping you stand out.
           </p>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-2">
-          <Card className="shadow-md">
-            <CardHeader>
-              <CardTitle>Input</CardTitle>
-              <CardDescription>Provide the job description and your base portfolio content.</CardDescription>
+        <div className="grid gap-8 lg:grid-cols-2 items-start"> {/* items-start to align tops */}
+          <Card className="shadow-md border-border/50 rounded-lg overflow-hidden">
+            <CardHeader className="bg-secondary/30 p-6">
+              <CardTitle className="font-poppins text-xl font-semibold">Input Details</CardTitle>
+              <CardDescription>Provide the target job description and your base content.</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="p-6 space-y-6">
               <div>
-                <Label htmlFor="job-description" className="text-primary font-medium">Job Description</Label>
+                <Label htmlFor="job-description" className="text-sm font-medium text-foreground block mb-2">Job Description</Label>
                 <Textarea
                   id="job-description"
-                  placeholder="Paste the job description here..."
+                  placeholder="Paste the full job description here..."
                   value={jobDescription}
                   onChange={(e) => setJobDescription(e.target.value)}
                   rows={8}
-                  className="mt-1 bg-background"
+                  className="bg-background border-border/60 focus:border-primary focus:bg-background/80 text-sm"
                 />
               </div>
               <div>
-                <Label htmlFor="portfolio-content" className="text-primary font-medium">Your Current Portfolio Content</Label>
+                <Label htmlFor="portfolio-content" className="text-sm font-medium text-foreground block mb-2">Your Current Portfolio Content</Label>
                 <Textarea
                   id="portfolio-content"
                   value={portfolioContent}
                   onChange={(e) => setPortfolioContent(e.target.value)}
                   rows={15}
-                   className="mt-1 bg-background"
+                   className="bg-background border-border/60 focus:border-primary focus:bg-background/80 text-sm font-mono" // Monospaced for code-like content
                 />
               </div>
-              <Button onClick={handleTailor} disabled={isPending} className="w-full sm:w-auto">
+              <Button onClick={handleTailor} disabled={isPending} className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2 shadow-sm hover:shadow-md">
                 {isPending ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -165,27 +167,27 @@ export function AiTailorSection() {
                 ) : (
                   <>
                    <Wand2 className="mr-2 h-4 w-4" />
-                    Tailor Content
+                    Tailor My Portfolio
                   </>
                 )}
               </Button>
             </CardContent>
           </Card>
 
-          <Card className="shadow-md">
-            <CardHeader>
-              <CardTitle>Tailored Output</CardTitle>
-              <CardDescription>AI-suggested content emphasizing relevant aspects for the job.</CardDescription>
+          <Card className="shadow-md border-border/50 rounded-lg overflow-hidden sticky top-24"> {/* Sticky output card */}
+            <CardHeader className="bg-secondary/30 p-6">
+              <CardTitle className="font-poppins text-xl font-semibold">Tailored Output</CardTitle>
+              <CardDescription>AI-suggested content emphasizing job-relevant aspects.</CardDescription>
             </CardHeader>
-            <CardContent>
-              <Label htmlFor="tailored-content" className="text-primary font-medium">Suggested Tailored Content</Label>
+            <CardContent className="p-6">
+              <Label htmlFor="tailored-content" className="text-sm font-medium text-foreground block mb-2">Suggested Tailored Content</Label>
               <Textarea
                 id="tailored-content"
-                placeholder="Tailored content will appear here..."
+                placeholder="Tailored content will appear here after processing..."
                 value={tailoredContent}
                 readOnly
-                rows={25}
-                 className="mt-1 bg-background focus-visible:ring-accent" // Use accent for focus
+                rows={26} // Adjusted rows slightly
+                 className="mt-1 bg-background focus-visible:ring-accent text-sm font-mono border-border/60 focus:border-accent focus:bg-background/80" // Use accent for focus, monospaced font
               />
             </CardContent>
           </Card>
