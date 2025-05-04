@@ -9,11 +9,11 @@ import { Button } from "@/components/ui/button";
 import { Loader2, Wand2, Sparkles } from 'lucide-react'; // Added Sparkles
 import { useToast } from "@/hooks/use-toast";
 
-// Using the existing initial content
+// Using the existing initial content - UPDATED CONTACT INFO
 const initialPortfolioContent = `
 ## Bharat Singh Parihar - Computer Science Student (Data Science Specialization)
 
-**Contact:** +91 9413770981 | bharat5160@gmail.com | github.com/bharat516 | linkedin.com/in/bharat-singh-parihar/
+**Contact:** +91 9451747691 | bharat3645@gmail.com | github.com/bharat3645 | linkedin.com/in/bharat-singh-parihar/
 
 **Summary:**
 I'm a Computer Science undergraduate student specializing in Data Science, deeply passionate about using technology to solve real-world problems. With experience in creating advanced machine learning applications and predictive analytics tools. My leadership roles in IEEE and CSI, coupled with successful participation in hackathons, have honed my collaborative and innovative skills. I am integrating AI, cloud computing, and cutting-edge technologies to contribute meaningfully while expanding my expertise through impactful research.

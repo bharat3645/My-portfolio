@@ -69,23 +69,30 @@ export function Interactive3DScene() {
     directionalLight.shadow.camera.far = 50;
     scene.add(directionalLight);
 
-    const pointLight = new THREE.PointLight(0xffffff, 0.8, 100);
-    pointLight.position.set(-5, -5, -5);
-    scene.add(pointLight);
+    // Add another accent light (e.g., Pink: hsl(330 100% 55%)) -> #FF1EB3
+    const accentLight = new THREE.PointLight(0xFF1EB3, 1.2, 100); // Increased intensity
+    accentLight.position.set(-8, 5, -8); // Positioned differently
+    scene.add(accentLight);
 
     // Animation loop
     let targetRotation = { x: 0, y: 0 };
+    const clock = new THREE.Clock();
+
     const animate = () => {
       if (!scene || !camera || !rendererRef.current) return; // Ensure objects exist
 
       animationFrameIdRef.current = requestAnimationFrame(animate);
+      const elapsedTime = clock.getElapsedTime();
 
-      // Smooth rotation towards target
+      // Subtle continuous rotation
+      shape.rotation.y = elapsedTime * 0.3; // Rotate on Y-axis based on time
+      shape.rotation.x = elapsedTime * 0.15; // Rotate on X-axis slowly
+
+      // Smooth rotation towards target (for mouse interaction)
+      // We keep the target rotation effect but dampen it slightly if needed
       shape.rotation.x += (targetRotation.x - shape.rotation.x) * 0.05;
       shape.rotation.y += (targetRotation.y - shape.rotation.y) * 0.05;
 
-      // Subtle continuous rotation
-      shape.rotation.y += 0.002;
 
       rendererRef.current.render(scene, camera);
     };
@@ -103,7 +110,7 @@ export function Interactive3DScene() {
     };
     window.addEventListener('resize', handleResize);
 
-    // Mouse interaction
+    // Mouse interaction - Updates target rotation
     let isDragging = false;
     let previousMousePosition = { x: 0, y: 0 };
     const rotationSpeed = 0.008;
@@ -122,7 +129,7 @@ export function Interactive3DScene() {
         y: event.clientY - previousMousePosition.y,
       };
 
-      // Update targetRotation for smooth animation
+      // Update targetRotation for smooth animation drift on drag
       targetRotation.y += deltaMove.x * rotationSpeed;
       targetRotation.x += deltaMove.y * rotationSpeed;
 
@@ -165,7 +172,7 @@ export function Interactive3DScene() {
       material?.dispose();
       ambientLight?.dispose();
       directionalLight?.dispose();
-      pointLight?.dispose();
+      accentLight?.dispose(); // Dispose added light
 
        // Clean up renderer and scene
        if (rendererRef.current) {

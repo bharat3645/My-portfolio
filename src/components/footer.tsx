@@ -12,7 +12,7 @@ export function Footer() {
         {/* Social Links */}
         <div className="flex items-center gap-4">
             <a
-             href="mailto:bharat5160@gmail.com"
+             href="mailto:bharat3645@gmail.com"
              aria-label="Email Bharat"
              target="_blank"
              rel="noopener noreferrer"
@@ -22,7 +22,7 @@ export function Footer() {
                 <span className="sr-only">Email</span>
             </a>
              <a
-             href="https://github.com/bharat516"
+             href="https://github.com/bharat3645"
              aria-label="Bharat's GitHub Profile"
              target="_blank"
              rel="noopener noreferrer"

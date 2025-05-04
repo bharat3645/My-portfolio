@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import Image from 'next/image';
 import { ExternalLink, Github } from "lucide-react";
 
-// User's project data from resume
+// User's project data from resume - UPDATED REPO URLS
 const projects = [
  {
     title: "AI-Driven Image Encryption System",
@@ -11,7 +11,7 @@ const projects = [
     imageUrl: "https://picsum.photos/seed/encryption/600/400",
     imageHint: "cyber security abstract",
     liveUrl: null, // Example: No live demo
-    repoUrl: "https://github.com/bharat516",
+    repoUrl: "https://github.com/bharat3645",
     tags: ["PyTorch", "CNN", "RNN", "Security", "Healthcare"]
   },
   {
@@ -19,8 +19,8 @@ const projects = [
     description: "Developed a privacy-preserving federated learning system for anomaly detection across complex computing devices.",
     imageUrl: "https://picsum.photos/seed/federated/600/400",
     imageHint: "network anomaly detection",
-    liveUrl: "https://github.com/bharat516", // Assuming live links are same as repo for now
-    repoUrl: "https://github.com/bharat516",
+    liveUrl: "https://github.com/bharat3645", // Assuming live links are same as repo for now
+    repoUrl: "https://github.com/bharat3645",
     tags: ["FedML", "TensorFlow", "Privacy", "MLOps", "Security"]
   },
    {
@@ -29,7 +29,7 @@ const projects = [
     imageUrl: "https://picsum.photos/seed/deepfake/600/400",
     imageHint: "ai face recognition",
     liveUrl: null,
-    repoUrl: "https://github.com/bharat516",
+    repoUrl: "https://github.com/bharat3645",
     tags: ["CNN", "MCDM", "Computer Vision", "Python", "Keras"]
   },
   {
@@ -37,8 +37,8 @@ const projects = [
     description: "Developed and deployed a scalable AI-powered brain tumor detection model using YOLOv8 and PyTorch, achieving high accuracy on MRI scans.",
     imageUrl: "https://picsum.photos/seed/braintumor/600/400",
     imageHint: "mri scan brain ai",
-    liveUrl: "https://github.com/bharat516",
-    repoUrl: "https://github.com/bharat516",
+    liveUrl: "https://github.com/bharat3645",
+    repoUrl: "https://github.com/bharat3645",
     tags: ["YOLOv8", "PyTorch", "AI", "Medical Imaging", "Docker"]
   },
    {
@@ -46,8 +46,8 @@ const projects = [
     description: "Created an OCR-based system to convert book text into spoken words using PyTesseract and OpenCV, improving accessibility.",
     imageUrl: "https://picsum.photos/seed/ocr/600/400",
     imageHint: "ocr accessibility vision",
-    liveUrl: "https://github.com/bharat516",
-    repoUrl: "https://github.com/bharat516",
+    liveUrl: "https://github.com/bharat3645",
+    repoUrl: "https://github.com/bharat3645",
     tags: ["OCR", "OpenCV", "Accessibility", "Python", "TTS"]
   },
   {
@@ -55,8 +55,8 @@ const projects = [
     description: "Experimented with APIs (OAuth Access Tokens) and frontend components for a software project using Figma, TypeScript, and React.",
     imageUrl: "https://picsum.photos/seed/aquatrace/600/400",
     imageHint: "software development abstract ui api",
-    liveUrl: "https://github.com/bharat516",
-    repoUrl: "https://github.com/bharat516",
+    liveUrl: "https://github.com/bharat3645",
+    repoUrl: "https://github.com/bharat3645",
     tags: ["ReactJS", "TypeScript", "API", "UI Design", "Figma", "Firebase"]
   },
 ];

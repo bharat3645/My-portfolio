@@ -31,21 +31,21 @@ export function ContactSection() {
              </p>
               {/* Contact Links */}
               <div className="space-y-5 pt-4">
-                 <a href="mailto:bharat5160@gmail.com" className="flex items-center space-x-3 group text-muted-foreground hover:text-primary transition-colors">
+                 <a href="mailto:bharat3645@gmail.com" className="flex items-center space-x-3 group text-muted-foreground hover:text-primary transition-colors">
                      <Mail className="w-5 h-5 text-accent transition-transform group-hover:scale-110" />
-                     <span>bharat5160@gmail.com</span>
+                     <span>bharat3645@gmail.com</span>
                  </a>
                   <div className="flex items-center space-x-3 group text-muted-foreground">
                      <Phone className="w-5 h-5 text-accent" />
-                     <span>+91 9413770981</span>
+                     <span>+91 9451747691</span>
                  </div>
                  <a href="https://www.linkedin.com/in/bharat-singh-parihar/" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 group text-muted-foreground hover:text-primary transition-colors">
                       <Linkedin className="w-5 h-5 text-accent transition-transform group-hover:scale-110" />
                      <span>linkedin.com/in/bharat-singh-parihar</span>
                  </a>
-                  <a href="https://github.com/bharat516" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 group text-muted-foreground hover:text-primary transition-colors">
+                  <a href="https://github.com/bharat3645" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 group text-muted-foreground hover:text-primary transition-colors">
                       <Github className="w-5 h-5 text-accent transition-transform group-hover:scale-110" />
-                     <span>github.com/bharat516</span>
+                     <span>github.com/bharat3645</span>
                  </a>
              </div>
            </div>
