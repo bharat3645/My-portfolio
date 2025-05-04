@@ -8,6 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Loader2, Wand2, Sparkles } from 'lucide-react'; // Added Sparkles
 import { useToast } from "@/hooks/use-toast";
+import { AnimatedSection } from "@/components/AnimatedSection";
+
 
 // Using the existing initial content - UPDATED CONTACT INFO
 const initialPortfolioContent = `
@@ -120,79 +122,83 @@ export function AiTailorSection() {
   };
 
   return (
-    <section id="tailor" className="w-full py-16 md:py-24 lg:py-32 bg-gradient-to-b from-secondary/50 to-background"> {/* Gradient background */}
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-          <Sparkles className="h-10 w-10 text-primary animate-pulse" /> {/* Animated Icon */}
-          <h2 className="font-poppins text-3xl font-bold tracking-tighter sm:text-5xl text-foreground">AI Portfolio Tailor</h2>
-          <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Paste a job description below. The AI will analyze it and rewrite your portfolio content to highlight the most relevant skills and experiences, helping you stand out.
-          </p>
-        </div>
-
-        <div className="grid gap-8 lg:grid-cols-2 items-start"> {/* items-start to align tops */}
-          <Card className="shadow-md border-border/50 rounded-lg overflow-hidden">
-            <CardHeader className="bg-secondary/30 p-6">
-              <CardTitle className="font-poppins text-xl font-semibold">Input Details</CardTitle>
-              <CardDescription>Provide the target job description and your base content.</CardDescription>
-            </CardHeader>
-            <CardContent className="p-6 space-y-6">
-              <div>
-                <Label htmlFor="job-description" className="text-sm font-medium text-foreground block mb-2">Job Description</Label>
+    <AnimatedSection direction="flip" delay={0.5}>
+      <section id="tailor" className="w-full py-16 md:py-24 lg:py-32 bg-gradient-to-b from-secondary/50 to-background">
+        <div className="container px-4 md:px-6">
+          <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
+            <Sparkles className="h-10 w-10 text-primary animate-pulse" />
+            <h2 className="font-poppins text-3xl font-bold tracking-tighter sm:text-5xl text-foreground">AI Portfolio Tailor</h2>
+            <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              Paste a job description below. The AI will analyze it and rewrite your portfolio content to highlight the most relevant skills and experiences, helping you stand out.
+            </p>
+          </div>
+  
+          <div className="grid gap-8 lg:grid-cols-2 items-start">
+            {/* Input Card */}
+            <Card className="shadow-md border-border/50 rounded-lg overflow-hidden">
+              <CardHeader className="bg-secondary/30 p-6">
+                <CardTitle className="font-poppins text-xl font-semibold">Input Details</CardTitle>
+                <CardDescription>Provide the target job description and your base content.</CardDescription>
+              </CardHeader>
+              <CardContent className="p-6 space-y-6">
+                <div>
+                  <Label htmlFor="job-description" className="text-sm font-medium text-foreground block mb-2">Job Description</Label>
+                  <Textarea
+                    id="job-description"
+                    placeholder="Paste the full job description here..."
+                    value={jobDescription}
+                    onChange={(e) => setJobDescription(e.target.value)}
+                    rows={8}
+                    className="bg-background border-border/60 focus:border-primary focus:bg-background/80 text-sm"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="portfolio-content" className="text-sm font-medium text-foreground block mb-2">Your Current Portfolio Content</Label>
+                  <Textarea
+                    id="portfolio-content"
+                    value={portfolioContent}
+                    onChange={(e) => setPortfolioContent(e.target.value)}
+                    rows={15}
+                    className="bg-background border-border/60 focus:border-primary focus:bg-background/80 text-sm font-mono"
+                  />
+                </div>
+                <Button onClick={handleTailor} disabled={isPending} className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2 shadow-sm hover:shadow-md">
+                  {isPending ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Tailoring...
+                    </>
+                  ) : (
+                    <>
+                      <Wand2 className="mr-2 h-4 w-4" />
+                      Tailor My Portfolio
+                    </>
+                  )}
+                </Button>
+              </CardContent>
+            </Card>
+  
+            {/* Output Card */}
+            <Card className="shadow-md border-border/50 rounded-lg overflow-hidden sticky top-24">
+              <CardHeader className="bg-secondary/30 p-6">
+                <CardTitle className="font-poppins text-xl font-semibold">Tailored Output</CardTitle>
+                <CardDescription>AI-suggested content emphasizing job-relevant aspects.</CardDescription>
+              </CardHeader>
+              <CardContent className="p-6">
+                <Label htmlFor="tailored-content" className="text-sm font-medium text-foreground block mb-2">Suggested Tailored Content</Label>
                 <Textarea
-                  id="job-description"
-                  placeholder="Paste the full job description here..."
-                  value={jobDescription}
-                  onChange={(e) => setJobDescription(e.target.value)}
-                  rows={8}
-                  className="bg-background border-border/60 focus:border-primary focus:bg-background/80 text-sm"
+                  id="tailored-content"
+                  placeholder="Tailored content will appear here after processing..."
+                  value={tailoredContent}
+                  readOnly
+                  rows={26}
+                  className="mt-1 bg-background focus-visible:ring-accent text-sm font-mono border-border/60 focus:border-accent focus:bg-background/80"
                 />
-              </div>
-              <div>
-                <Label htmlFor="portfolio-content" className="text-sm font-medium text-foreground block mb-2">Your Current Portfolio Content</Label>
-                <Textarea
-                  id="portfolio-content"
-                  value={portfolioContent}
-                  onChange={(e) => setPortfolioContent(e.target.value)}
-                  rows={15}
-                   className="bg-background border-border/60 focus:border-primary focus:bg-background/80 text-sm font-mono" // Monospaced for code-like content
-                />
-              </div>
-              <Button onClick={handleTailor} disabled={isPending} className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2 shadow-sm hover:shadow-md">
-                {isPending ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Tailoring...
-                  </>
-                ) : (
-                  <>
-                   <Wand2 className="mr-2 h-4 w-4" />
-                    Tailor My Portfolio
-                  </>
-                )}
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="shadow-md border-border/50 rounded-lg overflow-hidden sticky top-24"> {/* Sticky output card */}
-            <CardHeader className="bg-secondary/30 p-6">
-              <CardTitle className="font-poppins text-xl font-semibold">Tailored Output</CardTitle>
-              <CardDescription>AI-suggested content emphasizing job-relevant aspects.</CardDescription>
-            </CardHeader>
-            <CardContent className="p-6">
-              <Label htmlFor="tailored-content" className="text-sm font-medium text-foreground block mb-2">Suggested Tailored Content</Label>
-              <Textarea
-                id="tailored-content"
-                placeholder="Tailored content will appear here after processing..."
-                value={tailoredContent}
-                readOnly
-                rows={26} // Adjusted rows slightly
-                 className="mt-1 bg-background focus-visible:ring-accent text-sm font-mono border-border/60 focus:border-accent focus:bg-background/80" // Use accent for focus, monospaced font
-              />
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </AnimatedSection>
   );
-}
+  

@@ -3,64 +3,25 @@
 @tailwind utilities;
 
 body {
-  font-family: var(--font-inter), Arial, Helvetica, sans-serif; /* Use Inter font */
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }
 
 @layer base {
   :root {
     /* Cyberpunk Dark Theme (Default) */
-    --background: 240 15% 8%; /* Very Dark Blue/Black */
-    --foreground: 210 40% 95%; /* Off-White / Light Grey */
-    --card: 240 15% 12%; /* Slightly Lighter Dark Blue/Black */
-    --card-foreground: 210 40% 95%;
-    --popover: 240 15% 10%; /* Darker Popover */
-    --popover-foreground: 210 40% 95%;
-    --primary: 185 100% 50%; /* Bright Cyan/Electric Blue */
-    --primary-foreground: 240 15% 8%; /* Dark for contrast on Cyan */
-    --secondary: 240 10% 18%; /* Dark Grey */
-    --secondary-foreground: 210 30% 80%; /* Lighter Grey */
-    --muted: 240 10% 20%; /* Slightly darker muted */
-    --muted-foreground: 210 20% 60%; /* Grey */
-    --accent: 330 100% 55%; /* Hot Pink/Magenta */
-    --accent-foreground: 240 15% 8%; /* Dark for contrast on Pink */
-    --destructive: 0 84.2% 60.2%; /* Keep a bright red */
-    --destructive-foreground: 0 0% 98%; /* Light */
-    --border: 185 100% 30%; /* Cyan Border */
-    --input: 240 15% 15%; /* Dark input background */
-    --ring: 330 100% 55%; /* Pink for focus rings */
-    --chart-1: 185 100% 50%; /* Cyan */
-    --chart-2: 60 100% 50%; /* Yellow */
-    --chart-3: 330 100% 55%; /* Pink */
-    --chart-4: 270 100% 60%; /* Purple */
-    --chart-5: 120 100% 50%; /* Neon Green */
-    --radius: 0.3rem; /* Slightly sharper corners */
-
-    /* Sidebar Specific - Cyberpunk Dark */
-    --sidebar-background: 240 15% 10%; /* Darker sidebar */
-    --sidebar-foreground: 210 40% 90%; /* Light text */
-    --sidebar-primary: 185 100% 50%; /* Cyan */
-    --sidebar-primary-foreground: 240 15% 8%; /* Dark text */
-    --sidebar-accent: 330 100% 55%; /* Pink */
-    --sidebar-accent-foreground: 240 15% 8%; /* Dark text */
-    --sidebar-border: 185 100% 25%; /* Darker Cyan Border */
-    --sidebar-ring: 330 100% 55%; /* Pink */
-  }
-
-  .dark {
-    /* Using the same dark theme for .dark, as Cyberpunk is inherently dark */
     --background: 240 15% 8%;
     --foreground: 210 40% 95%;
     --card: 240 15% 12%;
     --card-foreground: 210 40% 95%;
     --popover: 240 15% 10%;
     --popover-foreground: 210 40% 95%;
-    --primary: 185 100% 50%; /* Cyan */
+    --primary: 185 100% 50%;
     --primary-foreground: 240 15% 8%;
     --secondary: 240 10% 18%;
     --secondary-foreground: 210 30% 80%;
     --muted: 240 10% 20%;
     --muted-foreground: 210 20% 60%;
-    --accent: 330 100% 55%; /* Pink */
+    --accent: 330 100% 55%;
     --accent-foreground: 240 15% 8%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -72,9 +33,9 @@ body {
     --chart-3: 330 100% 55%;
     --chart-4: 270 100% 60%;
     --chart-5: 120 100% 50%;
-    --radius: 0.3rem; /* Sharper corners */
+    --radius: 0.3rem;
 
-    /* Sidebar Dark Specific */
+    /* Sidebar Specific */
     --sidebar-background: 240 15% 10%;
     --sidebar-foreground: 210 40% 90%;
     --sidebar-primary: 185 100% 50%;
@@ -84,57 +45,158 @@ body {
     --sidebar-border: 185 100% 25%;
     --sidebar-ring: 330 100% 55%;
   }
-}
 
-@layer base {
+  .dark {
+    /* Same dark theme */
+    --background: 240 15% 8%;
+    --foreground: 210 40% 95%;
+    --card: 240 15% 12%;
+    --card-foreground: 210 40% 95%;
+    --popover: 240 15% 10%;
+    --popover-foreground: 210 40% 95%;
+    --primary: 185 100% 50%;
+    --primary-foreground: 240 15% 8%;
+    --secondary: 240 10% 18%;
+    --secondary-foreground: 210 30% 80%;
+    --muted: 240 10% 20%;
+    --muted-foreground: 210 20% 60%;
+    --accent: 330 100% 55%;
+    --accent-foreground: 240 15% 8%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 185 100% 30%;
+    --input: 240 15% 15%;
+    --ring: 330 100% 55%;
+    --chart-1: 185 100% 50%;
+    --chart-2: 60 100% 50%;
+    --chart-3: 330 100% 55%;
+    --chart-4: 270 100% 60%;
+    --chart-5: 120 100% 50%;
+    --radius: 0.3rem;
+
+    --sidebar-background: 240 15% 10%;
+    --sidebar-foreground: 210 40% 90%;
+    --sidebar-primary: 185 100% 50%;
+    --sidebar-primary-foreground: 240 15% 8%;
+    --sidebar-accent: 330 100% 55%;
+    --sidebar-accent-foreground: 240 15% 8%;
+    --sidebar-border: 185 100% 25%;
+    --sidebar-ring: 330 100% 55%;
+  }
+
   * {
     @apply border-border;
+    box-sizing: border-box;
   }
-  /* Ensure html has smooth scrolling for anchor links */
+
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+
   html {
-      scroll-behavior: smooth;
+    scroll-behavior: smooth;
+    width: 100%;
+    overflow-x: hidden;
   }
+
   body {
     @apply bg-background text-foreground;
-    /* scroll-behavior: smooth; // Moved to html */
-    /* Add a subtle glow effect to text - optional */
-    /* text-shadow: 0 0 5px hsla(var(--foreground), 0.1); */
+    overflow-y: scroll;
+    width: 100%;
+    overflow-x: hidden;
   }
-  /* Add global focus styles for accessibility and visual feedback */
+
   *:focus-visible {
-      @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
   }
-  /* Define font variables */
+
   h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-poppins), sans-serif;
-      /* Optional: Add slight glow to headers */
-      /* text-shadow: 0 0 8px hsla(var(--primary), 0.3); */
+    font-family: var(--font-poppins), sans-serif;
+  }
+
+  /* Slide & 3D Animation Keyframes */
+  @keyframes slide-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes flip-in {
+    from {
+      opacity: 0;
+      transform: rotateY(90deg);
+    }
+    to {
+      opacity: 1;
+      transform: rotateY(0);
+    }
+  }
+
+  .animate-slide-in-left {
+    animation: slide-in-left 0.6s ease-out forwards;
+  }
+
+  .animate-slide-in-up {
+    animation: slide-in-up 0.6s ease-out forwards;
+  }
+
+  .animate-flip-in {
+    animation: flip-in 0.8s ease-out forwards;
   }
 }
 
-/* Add subtle transitions to common elements */
 @layer components {
-  .btn, .card, a, input, textarea, button {
-     @apply transition-all duration-200 ease-in-out;
-  }
-  .card {
-      /* Add subtle neon glow on hover */
-      @apply transition-shadow duration-300;
-  }
-  .card:hover {
-      @apply shadow-[0_0_15px_2px_hsla(var(--primary),0.3)]; /* Use primary color for glow */
-  }
-  .btn {
-     @apply shadow-sm;
-  }
-   .btn:hover {
-      @apply shadow-md;
-      /* Optional: Add glow to buttons */
-      /* @apply shadow-[0_0_10px_1px_hsla(var(--accent),0.4)]; */
+  .btn,
+  .card,
+  a,
+  input,
+  textarea,
+  button {
+    @apply transition-all duration-200 ease-in-out;
   }
 
-   /* Add slight glow to inputs on focus */
-  input:focus-visible, textarea:focus-visible {
-      @apply shadow-[0_0_8px_1px_hsla(var(--ring),0.3)];
+  .card {
+    @apply transition-shadow duration-300;
+  }
+
+  .card:hover {
+    @apply shadow-[0_0_15px_2px_hsla(var(--primary),0.3)];
+  }
+
+  .btn {
+    @apply shadow-sm;
+  }
+
+  .btn:hover {
+    @apply shadow-md;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible {
+    @apply shadow-[0_0_8px_1px_hsla(var(--ring),0.3)];
+  }
+
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }

@@ -2,201 +2,172 @@
 
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export function Interactive3DScene() {
   const mountRef = useRef<HTMLDivElement>(null);
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null); // Ref to store renderer instance
-  const animationFrameIdRef = useRef<number | null>(null); // Ref to store animation frame ID
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const animationFrameIdRef = useRef<number | null>(null);
+  const modelRef = useRef<THREE.Group | null>(null);
+  const mixerRef = useRef<THREE.AnimationMixer | null>(null); // 👈 Animation mixer
 
   useEffect(() => {
-    // Ensure running only on the client-side where window/document are available
     if (typeof window === 'undefined' || !mountRef.current) return;
 
     const currentMount = mountRef.current;
-    let scene: THREE.Scene | null = new THREE.Scene();
-    let camera: THREE.PerspectiveCamera | null = new THREE.PerspectiveCamera(
-      60, // Field of View remains the same
+    let scene = new THREE.Scene();
+    let camera = new THREE.PerspectiveCamera(
+      45,
       currentMount.clientWidth / currentMount.clientHeight,
       0.1,
       1000
     );
-    // Keep camera position relatively close
-    camera.position.z = 4.5;
+    camera.position.set(0, 1, 5);
 
-    const localRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    rendererRef.current = localRenderer; // Store renderer instance
-    localRenderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
-    localRenderer.setPixelRatio(window.devicePixelRatio);
-    localRenderer.shadowMap.enabled = true;
-    localRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    rendererRef.current = renderer;
+    renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-    // Prevent adding multiple canvases if effect runs multiple times
     if (currentMount.childElementCount === 0) {
-      currentMount.appendChild(localRenderer.domElement);
+      currentMount.appendChild(renderer.domElement);
     }
 
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.1;
+    controls.rotateSpeed = 0.5;
+    controls.zoomSpeed = 0.5;
 
-    // Geometry - Changed to Icosahedron, adjusted size and detail
-    const geometry = new THREE.IcosahedronGeometry(1.5, 1); // Radius 1.5, Detail 1
+    const loader = new GLTFLoader();
+    loader.load(
+      '/models/model1-t.glb',
+      (gltf) => {
+        const model = gltf.scene;
+        modelRef.current = model;
 
-    // Material - Use primary theme color (Cyan: hsl(185 100% 50%)) -> #00FFFF
-    // Keep existing material properties for cyberpunk look
-    const material = new THREE.MeshPhysicalMaterial({
-        color: 0x00FFFF, // Theme primary (Cyan)
-        metalness: 0.1,
-        roughness: 0.15, // Slightly less rough for more shine
-        clearcoat: 0.9,
-        clearcoatRoughness: 0.15,
-        transmission: 0.1,
-        ior: 1.5,
-        reflectivity: 0.5, // Slightly more reflective
-        wireframe: false,
-        emissive: 0x00FFFF, // Add emissive color matching base color
-        emissiveIntensity: 0.15, // Control the glow intensity
-    });
+        // Center and scale model
+        const box = new THREE.Box3().setFromObject(model);
+        const center = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const scale = 3 / maxDim;
+        model.position.sub(center);
+        model.scale.setScalar(scale);
 
-    const shape = new THREE.Mesh(geometry, material);
-    shape.castShadow = true;
-    shape.receiveShadow = true;
-    scene.add(shape);
+        model.traverse((child) => {
+          if (child instanceof THREE.Mesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+          }
+        });
 
-    // Lighting - Keep existing setup for contrast
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
-    scene.add(ambientLight);
+        scene.add(model);
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 2.0);
+        // 👇 Animation mixer
+        if (gltf.animations && gltf.animations.length > 0) {
+          const mixer = new THREE.AnimationMixer(model);
+          mixerRef.current = mixer;
+          gltf.animations.forEach((clip) => {
+            mixer.clipAction(clip).play();
+          });
+        }
+      },
+      undefined,
+      (error) => console.error('Error loading model:', error)
+    );
+
+    // Lighting
+    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(5, 10, 7.5);
     directionalLight.castShadow = true;
-    directionalLight.shadow.mapSize.width = 1024;
-    directionalLight.shadow.mapSize.height = 1024;
+    directionalLight.shadow.mapSize.set(1024, 1024);
     directionalLight.shadow.camera.near = 0.5;
     directionalLight.shadow.camera.far = 50;
     scene.add(directionalLight);
 
-    // Accent light (Pink: hsl(330 100% 55%)) -> #FF1EB3
-    const accentLight = new THREE.PointLight(0xFF1EB3, 1.8, 100);
-    accentLight.position.set(-8, 5, -8);
-    scene.add(accentLight);
+    const pointLight = new THREE.PointLight(0xff1eb3, 0.8, 100);
+    pointLight.position.set(-8, 5, -8);
+    scene.add(pointLight);
 
     // Animation loop
-    let targetRotation = { x: 0, y: 0 };
     const clock = new THREE.Clock();
-
     const animate = () => {
-      if (!scene || !camera || !rendererRef.current) return; // Ensure objects exist
-
       animationFrameIdRef.current = requestAnimationFrame(animate);
-      const elapsedTime = clock.getElapsedTime();
+      const delta = clock.getDelta();
 
-      // Subtle continuous rotation
-      shape.rotation.y = elapsedTime * 0.25; // Adjusted speed slightly
-      shape.rotation.x = elapsedTime * 0.12; // Adjusted speed slightly
-
-      // Smooth rotation towards target (for mouse interaction)
-      shape.rotation.x += (targetRotation.x - shape.rotation.x) * 0.05;
-      shape.rotation.y += (targetRotation.y - shape.rotation.y) * 0.05;
-
-
-      rendererRef.current.render(scene, camera);
+      controls.update();
+      if (mixerRef.current) mixerRef.current.update(delta); // 👈 update mixer
+      renderer.render(scene, camera);
     };
     animate();
 
-    // Handle resize
+    // Resize handler
     const handleResize = () => {
-      if (!currentMount || !camera || !rendererRef.current) return;
+      if (!camera || !rendererRef.current || !currentMount) return;
       const width = currentMount.clientWidth;
       const height = currentMount.clientHeight;
-
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
       rendererRef.current.setSize(width, height);
     };
     window.addEventListener('resize', handleResize);
 
-    // Mouse interaction - Updates target rotation
+    // Mouse drag rotation
     let isDragging = false;
-    let previousMousePosition = { x: 0, y: 0 };
-    const rotationSpeed = 0.008;
+    let prevMouse = { x: 0, y: 0 };
 
-    const onMouseDown = (event: MouseEvent) => {
+    const onMouseDown = (e: MouseEvent) => {
       isDragging = true;
-      previousMousePosition = { x: event.clientX, y: event.clientY };
-      currentMount.style.cursor = 'grabbing'; // Change cursor on drag
+      prevMouse = { x: e.clientX, y: e.clientY };
+      currentMount.style.cursor = 'grabbing';
     };
 
-    const onMouseMove = (event: MouseEvent) => {
-      if (!isDragging) return;
-
-      const deltaMove = {
-        x: event.clientX - previousMousePosition.x,
-        y: event.clientY - previousMousePosition.y,
-      };
-
-      // Update targetRotation for smooth animation drift on drag
-      targetRotation.y += deltaMove.x * rotationSpeed;
-      targetRotation.x += deltaMove.y * rotationSpeed;
-
-      previousMousePosition = { x: event.clientX, y: event.clientY };
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isDragging || !modelRef.current) return;
+      const deltaX = e.clientX - prevMouse.x;
+      const deltaY = e.clientY - prevMouse.y;
+      modelRef.current.rotation.y += deltaX * 0.01;
+      modelRef.current.rotation.x += deltaY * 0.01;
+      prevMouse = { x: e.clientX, y: e.clientY };
     };
 
-    const onMouseUp = () => {
-      if (isDragging) {
-        isDragging = false;
-        currentMount.style.cursor = 'grab'; // Restore cursor
-      }
+    const endDrag = () => {
+      isDragging = false;
+      currentMount.style.cursor = 'grab';
     };
-     const onMouseLeave = () => { // Handle mouse leaving the component
-      if (isDragging) {
-        isDragging = false;
-        currentMount.style.cursor = 'grab'; // Restore cursor
-      }
-    };
-
 
     currentMount.addEventListener('mousedown', onMouseDown);
-    window.addEventListener('mousemove', onMouseMove); // Listen on window to catch drags outside the element
-    window.addEventListener('mouseup', onMouseUp); // Listen on window to catch mouse up outside the element
-    currentMount.addEventListener('mouseleave', onMouseLeave); // Handle cursor leaving the component
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', endDrag);
+    currentMount.addEventListener('mouseleave', endDrag);
 
-
-    // Cleanup function
+    // Cleanup
     return () => {
-      if (animationFrameIdRef.current) {
-        cancelAnimationFrame(animationFrameIdRef.current);
-      }
+      cancelAnimationFrame(animationFrameIdRef.current!);
       window.removeEventListener('resize', handleResize);
       currentMount.removeEventListener('mousedown', onMouseDown);
       window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mouseup', onMouseUp);
-      currentMount.removeEventListener('mouseleave', onMouseLeave);
+      window.removeEventListener('mouseup', endDrag);
+      currentMount.removeEventListener('mouseleave', endDrag);
 
-      // Dispose Three.js objects
-      geometry?.dispose();
-      material?.dispose();
-      ambientLight?.dispose();
-      directionalLight?.dispose();
-      accentLight?.dispose(); // Dispose added light
+      controls.dispose();
+      mixerRef.current?.stopAllAction();
+      mixerRef.current?.uncacheRoot(modelRef.current!);
+      renderer.dispose();
+      if (renderer.domElement.parentNode === currentMount) {
+        currentMount.removeChild(renderer.domElement);
+      }
 
-       // Clean up renderer and scene
-       if (rendererRef.current) {
-        // Attempt to remove the canvas element
-        if (currentMount && rendererRef.current.domElement.parentNode === currentMount) {
-           try {
-             currentMount.removeChild(rendererRef.current.domElement);
-           } catch (e) {
-             console.error("Error removing renderer DOM element during cleanup:", e);
-           }
-        }
-        rendererRef.current.dispose(); // Dispose the renderer
-        rendererRef.current = null; // Clear the ref
-       }
-
-      // Help garbage collector by nullifying references
-       scene = null;
-       camera = null;
-
+      scene.clear();
+      scene = null!;
+      camera = null!;
     };
-  }, []); // Empty dependency array ensures this runs once on mount
+  }, []);
 
-  return <div ref={mountRef} className="w-full h-full cursor-grab" />; // Initial cursor style
+  return <div ref={mountRef} className="w-full h-full cursor-grab" />;
 }

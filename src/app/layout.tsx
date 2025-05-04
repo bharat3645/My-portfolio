@@ -1,22 +1,22 @@
-import type {Metadata} from 'next';
+import type { Metadata } from 'next';
 import { Inter, Poppins } from 'next/font/google'; // Import Google Fonts
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/toaster";
 import './globals.css';
+import RouteTransition from '@/components/transition'; // Renamed to 'transition' instead of 'RouteTransition'
 
 // Configure fonts
 const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-inter', // Define CSS variable for Inter
+  variable: '--font-inter',
   display: 'swap',
 });
 
 const poppins = Poppins({
   subsets: ['latin'],
-  weight: ['400', '600', '700'], // Load necessary weights
-  variable: '--font-poppins', // Define CSS variable for Poppins
+  weight: ['400', '600', '700'],
+  variable: '--font-poppins',
   display: 'swap',
 });
-
 
 export const metadata: Metadata = {
   title: 'Bharat Singh Parihar - Portfolio',
@@ -30,8 +30,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
-      <body className={`antialiased`}> {/* Removed font classes from body, applied via HTML */}
-        {children}
+      <body className="antialiased">
+        <RouteTransition>
+          {children}
+        </RouteTransition>
         <Toaster />
       </body>
     </html>
