@@ -20,8 +20,8 @@ export function Interactive3DScene() {
       0.1,
       1000
     );
-    // Move camera closer to make the object appear larger
-    camera.position.z = 4.5; // Was 6
+    // Keep camera position relatively close
+    camera.position.z = 4.5;
 
     const localRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     rendererRef.current = localRenderer; // Store renderer instance
@@ -36,11 +36,11 @@ export function Interactive3DScene() {
     }
 
 
-    // Geometry - Slightly larger scale
-    const geometry = new THREE.TorusKnotGeometry(1.4, 0.45, 120, 18); // Increased size slightly
+    // Geometry - Changed to Icosahedron, adjusted size and detail
+    const geometry = new THREE.IcosahedronGeometry(1.5, 1); // Radius 1.5, Detail 1
 
     // Material - Use primary theme color (Cyan: hsl(185 100% 50%)) -> #00FFFF
-    // Increased emissive property for higher contrast glow
+    // Keep existing material properties for cyberpunk look
     const material = new THREE.MeshPhysicalMaterial({
         color: 0x00FFFF, // Theme primary (Cyan)
         metalness: 0.1,
@@ -60,11 +60,11 @@ export function Interactive3DScene() {
     shape.receiveShadow = true;
     scene.add(shape);
 
-    // Lighting - Increased intensities for more contrast
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5); // Increased intensity
+    // Lighting - Keep existing setup for contrast
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
     scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 2.0); // Increased intensity
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 2.0);
     directionalLight.position.set(5, 10, 7.5);
     directionalLight.castShadow = true;
     directionalLight.shadow.mapSize.width = 1024;
@@ -73,8 +73,8 @@ export function Interactive3DScene() {
     directionalLight.shadow.camera.far = 50;
     scene.add(directionalLight);
 
-    // Add another accent light (e.g., Pink: hsl(330 100% 55%)) -> #FF1EB3
-    const accentLight = new THREE.PointLight(0xFF1EB3, 1.8, 100); // Increased intensity
+    // Accent light (Pink: hsl(330 100% 55%)) -> #FF1EB3
+    const accentLight = new THREE.PointLight(0xFF1EB3, 1.8, 100);
     accentLight.position.set(-8, 5, -8);
     scene.add(accentLight);
 
