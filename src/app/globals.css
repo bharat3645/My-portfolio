@@ -90,9 +90,13 @@ body {
   * {
     @apply border-border;
   }
+  /* Ensure html has smooth scrolling for anchor links */
+  html {
+      scroll-behavior: smooth;
+  }
   body {
     @apply bg-background text-foreground;
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth; // Moved to html */
     /* Add a subtle glow effect to text - optional */
     /* text-shadow: 0 0 5px hsla(var(--foreground), 0.1); */
   }

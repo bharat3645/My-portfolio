@@ -5,7 +5,7 @@ import { ArrowDown } from 'lucide-react';
 
 export function HeroSection() {
   return (
-    <section id="hero" className="w-full min-h-[80vh] md:min-h-screen flex items-center bg-gradient-to-br from-secondary via-background to-secondary/50 relative overflow-hidden">
+    <section id="hero" className="w-full min-h-[85vh] md:min-h-screen flex items-center bg-gradient-to-br from-secondary via-background to-secondary/50 relative overflow-hidden">
       {/* Subtle background pattern (optional) */}
        <div className="absolute inset-0 opacity-[0.03] bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
 
@@ -35,7 +35,8 @@ export function HeroSection() {
             </Link>
           </div>
         </div>
-        <div className="relative w-full h-[350px] md:h-[450px] lg:h-[550px] z-0 flex items-center justify-center">
+        {/* Increased height of the 3D container */}
+        <div className="relative w-full h-[400px] md:h-[550px] lg:h-[650px] z-0 flex items-center justify-center">
            {/* Apply perspective for a better 3D feel and ensure centering */}
           <div className="w-full h-full perspective-[1000px]">
              <Interactive3DScene />

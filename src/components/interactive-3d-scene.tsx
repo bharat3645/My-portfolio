@@ -15,12 +15,13 @@ export function Interactive3DScene() {
     const currentMount = mountRef.current;
     let scene: THREE.Scene | null = new THREE.Scene();
     let camera: THREE.PerspectiveCamera | null = new THREE.PerspectiveCamera(
-      60,
+      60, // Field of View remains the same
       currentMount.clientWidth / currentMount.clientHeight,
       0.1,
       1000
     );
-    camera.position.z = 6;
+    // Move camera closer to make the object appear larger
+    camera.position.z = 4.5; // Was 6
 
     const localRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     rendererRef.current = localRenderer; // Store renderer instance
@@ -29,26 +30,29 @@ export function Interactive3DScene() {
     localRenderer.shadowMap.enabled = true;
     localRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-    // Prevent adding multiple canvases if effect runs multiple times (though deps array should prevent this)
+    // Prevent adding multiple canvases if effect runs multiple times
     if (currentMount.childElementCount === 0) {
       currentMount.appendChild(localRenderer.domElement);
     }
 
 
-    // Geometry
-    const geometry = new THREE.TorusKnotGeometry(1.2, 0.4, 100, 16);
+    // Geometry - Slightly larger scale
+    const geometry = new THREE.TorusKnotGeometry(1.4, 0.45, 120, 18); // Increased size slightly
 
     // Material - Use primary theme color (Cyan: hsl(185 100% 50%)) -> #00FFFF
+    // Increased emissive property for higher contrast glow
     const material = new THREE.MeshPhysicalMaterial({
-        color: 0x00FFFF, // Updated to theme primary (Cyan)
+        color: 0x00FFFF, // Theme primary (Cyan)
         metalness: 0.1,
-        roughness: 0.2,
-        clearcoat: 0.8,
-        clearcoatRoughness: 0.2,
-        transmission: 0.1, // Slight transparency/light transmission
-        ior: 1.5, // Index of refraction
-        reflectivity: 0.4,
+        roughness: 0.15, // Slightly less rough for more shine
+        clearcoat: 0.9,
+        clearcoatRoughness: 0.15,
+        transmission: 0.1,
+        ior: 1.5,
+        reflectivity: 0.5, // Slightly more reflective
         wireframe: false,
+        emissive: 0x00FFFF, // Add emissive color matching base color
+        emissiveIntensity: 0.15, // Control the glow intensity
     });
 
     const shape = new THREE.Mesh(geometry, material);
@@ -56,11 +60,11 @@ export function Interactive3DScene() {
     shape.receiveShadow = true;
     scene.add(shape);
 
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
+    // Lighting - Increased intensities for more contrast
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5); // Increased intensity
     scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 2.0); // Increased intensity
     directionalLight.position.set(5, 10, 7.5);
     directionalLight.castShadow = true;
     directionalLight.shadow.mapSize.width = 1024;
@@ -70,8 +74,8 @@ export function Interactive3DScene() {
     scene.add(directionalLight);
 
     // Add another accent light (e.g., Pink: hsl(330 100% 55%)) -> #FF1EB3
-    const accentLight = new THREE.PointLight(0xFF1EB3, 1.2, 100); // Increased intensity
-    accentLight.position.set(-8, 5, -8); // Positioned differently
+    const accentLight = new THREE.PointLight(0xFF1EB3, 1.8, 100); // Increased intensity
+    accentLight.position.set(-8, 5, -8);
     scene.add(accentLight);
 
     // Animation loop
@@ -85,11 +89,10 @@ export function Interactive3DScene() {
       const elapsedTime = clock.getElapsedTime();
 
       // Subtle continuous rotation
-      shape.rotation.y = elapsedTime * 0.3; // Rotate on Y-axis based on time
-      shape.rotation.x = elapsedTime * 0.15; // Rotate on X-axis slowly
+      shape.rotation.y = elapsedTime * 0.25; // Adjusted speed slightly
+      shape.rotation.x = elapsedTime * 0.12; // Adjusted speed slightly
 
       // Smooth rotation towards target (for mouse interaction)
-      // We keep the target rotation effect but dampen it slightly if needed
       shape.rotation.x += (targetRotation.x - shape.rotation.x) * 0.05;
       shape.rotation.y += (targetRotation.y - shape.rotation.y) * 0.05;
 
