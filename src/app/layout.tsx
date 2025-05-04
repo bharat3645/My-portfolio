@@ -29,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable}`}> {/* Apply font variables to HTML tag */}
+    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body className={`antialiased`}> {/* Removed font classes from body, applied via HTML */}
         {children}
         <Toaster />
