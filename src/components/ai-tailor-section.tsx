@@ -179,23 +179,23 @@ export function AiTailorSection() {
             </Card>
   
             {/* Output Card */}
-            <Card className="shadow-md border-border/50 rounded-lg overflow-hidden sticky top-24">
-              <CardHeader className="bg-secondary/30 p-6">
-                <CardTitle className="font-poppins text-xl font-semibold">Tailored Output</CardTitle>
-                <CardDescription>AI-suggested content emphasizing job-relevant aspects.</CardDescription>
-              </CardHeader>
-              <CardContent className="p-6">
-                <Label htmlFor="tailored-content" className="text-sm font-medium text-foreground block mb-2">Suggested Tailored Content</Label>
-                <Textarea
-                  id="tailored-content"
-                  placeholder="Tailored content will appear here after processing..."
-                  value={tailoredContent}
-                  readOnly
-                  rows={26}
-                  className="mt-1 bg-background focus-visible:ring-accent text-sm font-mono border-border/60 focus:border-accent focus:bg-background/80"
-                />
-              </CardContent>
-            </Card>
+            <Card className="shadow-md border-border/50 rounded-lg overflow-hidden sticky top-24"> {/* Sticky output card */}
+            <CardHeader className="bg-secondary/30 p-6">
+              <CardTitle className="font-poppins text-xl font-semibold">Tailored Output</CardTitle>
+              <CardDescription>AI-suggested content emphasizing job-relevant aspects.</CardDescription>
+            </CardHeader>
+            <CardContent className="p-6">
+              <Label htmlFor="tailored-content" className="text-sm font-medium text-foreground block mb-2">Suggested Tailored Content</Label>
+              <Textarea
+                id="tailored-content"
+                placeholder="Tailored content will appear here after processing..."
+                value={tailoredContent}
+                readOnly
+                rows={26} // Adjusted rows slightly
+                 className="mt-1 bg-background focus-visible:ring-accent text-sm font-mono border-border/60 focus:border-accent focus:bg-background/80" // Use accent for focus, monospaced font
+              />
+            </CardContent>
+          </Card>
           </div>
         </div>
       </section>

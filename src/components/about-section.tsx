@@ -37,10 +37,10 @@ export function AboutSection() {
             <AnimatedSection direction="left" delay={0.1}>
               <div className="space-y-4 text-muted-foreground md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed">
                 <p>
-                  I'm a Computer Science undergraduate specializing in Data Science, driven by a passion for merging analytical thinking with user-centered design...
+                  I'm a Computer Science undergraduate specializing in Data Science, driven by a passion for merging analytical thinking with user-centered design. I excel at transforming complex data into intuitive interfaces and leveraging AI/ML to create impactful, real-world applications.
                 </p>
                 <p>
-                  My experience spans developing advanced machine learning models, crafting interactive web applications...
+                  My experience spans developing advanced machine learning models, crafting interactive web applications, and leading collaborative projects. Through roles in IEEE and CSI, and success in hackathons, I've honed my teamwork, innovation, and problem-solving skills. I'm eager to explore the intersection of AI, cloud computing, and design to build cutting-edge solutions.
                 </p>
               </div>
             </AnimatedSection>
