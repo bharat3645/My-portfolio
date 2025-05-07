@@ -13,13 +13,13 @@ export function Header() {
       transition={{ duration: 0.5, ease: 'easeOut' }}
       className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
     >
-      <div className="container flex h-16 items-center">
+      <div className="container flex h-20 items-center">
         <Link href="/" className="mr-6 flex items-center space-x-2 group">
-          <Brush className="h-6 w-6 text-primary transition-transform duration-300 ease-in-out group-hover:rotate-[-15deg]" />
-          <span className="font-poppins font-semibold text-lg hidden sm:inline-block tracking-tight text-foreground group-hover:text-primary transition-colors">
+          <Brush className="h-8 w-8 text-primary transition-transform duration-300 ease-in-out group-hover:rotate-[-15deg]" />
+          <span className="font-poppins font-semibold text-2xl hidden sm:inline-block tracking-tight text-foreground group-hover:text-primary transition-colors">
             Bharat S. Parihar
           </span>
-          <span className="font-poppins font-semibold text-lg inline-block sm:hidden tracking-tight text-foreground group-hover:text-primary transition-colors">
+          <span className="font-poppins font-semibold text-2xl inline-block sm:hidden tracking-tight text-foreground group-hover:text-primary transition-colors">
             BSP
           </span>
         </Link>

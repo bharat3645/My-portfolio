@@ -1,3 +1,4 @@
+/* stylelint-disable at-rule-no-unknown */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -115,6 +116,16 @@ body {
     font-family: var(--font-poppins), sans-serif;
   }
 
+  /* Tech grid animation */
+  @keyframes gridMove {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 1000px 1000px;
+    }
+  }
+
   /* Slide & 3D Animation Keyframes */
   @keyframes slide-in-left {
     from {
@@ -159,6 +170,19 @@ body {
 
   .animate-flip-in {
     animation: flip-in 0.8s ease-out forwards;
+  }
+
+  /* Hide Next.js development status banner */
+  #__next-dev-status {
+    display: none !important;
+  }
+
+  /* Hide Next.js dev overlay and HMR indicators */
+  #__next-dev-overlay,
+  #__next-build-indicator,
+  .next-dev-status,
+  .next-dev-overlay {
+    display: none !important;
   }
 }
 

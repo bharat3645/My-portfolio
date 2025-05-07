@@ -4,7 +4,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear(); // Get current year dynamically
 
   return (
-    <footer className="py-8 md:py-10 bg-secondary/50 border-t border-border/40 text-secondary-foreground">
+    <footer className="relative z-[9999] px-8 md:px-12 py-8 md:py-10 bg-secondary/50 border-t border-border/40 text-secondary-foreground">
       <div className="container flex flex-col items-center justify-center gap-6 md:flex-row md:justify-between">
         <p className="text-center text-xs md:text-sm leading-loose text-muted-foreground">
           &copy; {currentYear} Bharat Singh Parihar. Designed & Built with Passion.

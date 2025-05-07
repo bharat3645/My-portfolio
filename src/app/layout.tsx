@@ -3,6 +3,7 @@ import { Inter, Poppins } from 'next/font/google'; // Import Google Fonts
 import { Toaster } from "@/components/ui/toaster";
 import './globals.css';
 import RouteTransition from '@/components/transition'; // Renamed to 'transition' instead of 'RouteTransition'
+import TechBackgroundWrapper from '@/components/TechBackgroundWrapper';
 
 // Configure fonts
 const inter = Inter({
@@ -13,14 +14,17 @@ const inter = Inter({
 
 const poppins = Poppins({
   subsets: ['latin'],
-  weight: ['400', '600', '700'],
   variable: '--font-poppins',
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
   display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'Bharat Singh Parihar - Portfolio',
-  description: 'Portfolio of Bharat Singh Parihar, a Computer Science student specializing in Data Science and AI.',
+  title: {
+    default: 'Bharat | Full-Stack Developer & AI Enthusiast',
+    template: '%s | Bharat',
+  },
+  description: 'Portfolio of Bharat - Full-stack developer and AI enthusiast',
 };
 
 export default function RootLayout({
@@ -31,6 +35,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body className="antialiased">
+        {/* Temporarily disabled to isolate error */}
+        {/* <TechBackgroundWrapper /> */}
         <RouteTransition>
           {children}
         </RouteTransition>
