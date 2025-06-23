@@ -6,7 +6,7 @@ A visually stunning, interactive, and AI-powered portfolio website built with Ne
 
 ## 🌌 Live Demo
 
-> _Add your deployment link here if available!_
+> bharat3645.netlify.app/
 
 ---
 
