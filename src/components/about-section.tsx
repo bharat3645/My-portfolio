@@ -89,14 +89,14 @@ export function AboutSection() {
 
           {/* RIGHT IMAGE */}
           <AnimatedSection direction="flip" delay={0.4}>
-            <div className="lg:col-span-2 flex items-center justify-center lg:justify-end">
-              <Card className="overflow-hidden rounded-xl shadow-xl border-none w-full max-w-md lg:max-w-sm aspect-[4/5]">
+            <div className="lg:col-span-2 flex items-center justify-center lg:justify-end h-full">
+              <Card className="overflow-hidden rounded-xl shadow-xl border-none w-full max-w-xl aspect-[4/5]">
                 <CardContent className="p-0 h-full">
                   <Image
                     src="/my-photo.jpg"
                     alt="Bharat Singh Parihar - Portrait"
-                    width={600}
-                    height={750}
+                    width={800}
+                    height={1000}
                     className="object-cover w-full h-full"
                     priority
                   />

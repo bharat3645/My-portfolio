@@ -94,14 +94,14 @@ const projects = [
     tags: ["Blockchain", "Healthcare", "Data Security"],
   },
   {
-    title: "ETS (Emotion Tracking System)",
+    title: "ETS (E-Ticketing System)",
     description:
-      "Emotion analysis system using facial recognition and machine learning to track and interpret real-time emotional responses.",
+      "E-Ticketing System using React, Node.js, and MongoDB to manage event tickets and user accounts.",
     imageUrl: "https://picsum.photos/seed/ets/600/400",
-    imageHint: "real-time facial emotion detection",
+    imageHint: "e-ticketing system",
     liveUrl: null,
     repoUrl: "https://github.com/bharat3645/ETS",
-    tags: ["Facial Recognition", "Emotion Analysis", "ML"],
+    tags: ["React", "Node.js", "MongoDB", "Authentication", "Event Management"],
   },
   {
     title: "DreamCanvas",
@@ -156,116 +156,58 @@ const projects = [
 ];
 
 export function ProjectsSection() {
-  // Separate projects with and without images
-  const featuredProjects = projects.filter(p => Boolean(p.imageUrl));
-  const otherProjects = projects.filter(p => !p.imageUrl);
   return (
     <section id="projects" className="w-full py-16 md:py-24 lg:py-32 bg-secondary/50">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
           <h2 className="font-poppins text-3xl font-bold tracking-tighter sm:text-5xl text-foreground animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
-            Featured Projects
+            Projects
           </h2>
           <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed animate-slide-in-up" style={{ animationDelay: '0.2s' }}>
             A selection of projects blending UI/UX principles with Data Science and AI.
           </p>
         </div>
-        {/* Featured Projects */}
-        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-12">
-          {featuredProjects.length > 0 ? (
-            featuredProjects.map((project, index) => (
-              <Card
-                key={project.title}
-                className="group flex flex-col overflow-hidden rounded-lg shadow-sm border border-transparent hover:border-primary/20 hover:shadow-xl transition-all duration-300 ease-in-out bg-card animate-slide-in-up"
-                style={{ animationDelay: `${0.2 + index * 0.15}s` }}
-              >
-                <CardHeader className="p-0 relative overflow-hidden">
-                  <div className="aspect-video">
-                    <Image
-                      src={project.imageUrl!}
-                      alt={project.title}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      style={{ objectFit: 'cover' }}
-                      data-ai-hint={project.imageHint}
-                      className="transition-transform duration-500 ease-in-out group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-                </CardHeader>
-                <CardContent className="p-4 flex-1 flex flex-col">
-                  <CardTitle className="mb-2 text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
-                    {project.title}
-                  </CardTitle>
-                  <CardDescription className="mb-4 flex-1 text-muted-foreground text-sm">
-                    {project.description}
-                  </CardDescription>
-                  <div className="flex flex-wrap gap-2 mb-4 pt-2 border-t border-border/50">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs bg-accent/10 text-accent font-medium px-2.5 py-1 rounded-full border border-accent/30"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </CardContent>
-                <CardFooter className="p-4 pt-0 mt-auto flex justify-end bg-secondary/30 rounded-b-lg">
-                  {project.repoUrl ? (
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      asChild
-                      className="text-muted-foreground hover:text-primary hover:border-primary/50 hover:bg-primary/5"
+        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {projects.map((project, index) => (
+            <Card
+              key={project.title}
+              className="group flex flex-col overflow-hidden rounded-lg shadow-sm border border-transparent hover:border-primary/20 hover:shadow-xl transition-all duration-300 ease-in-out bg-card animate-slide-in-up"
+              style={{ animationDelay: `${0.2 + index * 0.1}s` }}
+            >
+              <CardHeader className="flex flex-row items-center justify-between p-4 pb-0">
+                <CardTitle className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+                  {project.title}
+                </CardTitle>
+                {project.repoUrl && (
+                  <a
+                    href={project.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-primary"
+                    title="View on GitHub"
+                  >
+                    <Github className="h-6 w-6" />
+                  </a>
+                )}
+              </CardHeader>
+              <CardContent className="p-4 flex-1 flex flex-col">
+                <CardDescription className="mb-4 flex-1 text-muted-foreground text-sm">
+                  {project.description}
+                </CardDescription>
+                <div className="flex flex-wrap gap-2 mt-auto pt-2 border-t border-border/50">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs bg-accent/10 text-accent font-medium px-2.5 py-1 rounded-full border border-accent/30"
                     >
-                      <a
-                        href={project.repoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Github className="mr-2 h-4 w-4" /> Code
-                      </a>
-                    </Button>
-                  ) : (
-                    <Button
-                      size="sm"
-                      disabled
-                      variant="outline"
-                      className="text-muted-foreground/50 border-muted-foreground/20 cursor-not-allowed"
-                    >
-                      <Github className="mr-2 h-4 w-4" /> No Code
-                    </Button>
-                  )}
-                </CardFooter>
-              </Card>
-            ))
-          ) : (
-            <div className="col-span-full text-center text-destructive animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
-              No featured projects found.
-            </div>
-          )}
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
-
-        {/* Other Projects */}
-        {otherProjects.length > 0 && (
-          <div className="mt-16">
-            <h3 className="font-poppins text-2xl font-bold tracking-tight mb-6 text-foreground">Other Projects</h3>
-            <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-              {otherProjects.map((project) => (
-                <li key={project.title}>
-                  {project.repoUrl ? (
-                    <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="hover:text-primary underline">
-                      {project.title}
-                    </a>
-                  ) : (
-                    project.title
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
     </section>
   );
