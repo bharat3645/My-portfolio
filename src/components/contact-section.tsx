@@ -7,6 +7,12 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Mail, Linkedin, Github, Phone, Send } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
 
 export function ContactSection() {
   const handleSubmit = async (formData: FormData) => {
@@ -96,10 +102,36 @@ export function ContactSection() {
                     <Label htmlFor="message">Message</Label>
                     <Textarea id="message" name="message" placeholder="Tell me about your project or query..." required rows={5} />
                   </div>
-                  <Button type="submit" className="w-full sm:w-auto flex items-center gap-2">
-                    <Send className="w-4 h-4" />
-                    Send Message
-                  </Button>
+                  <div className="flex justify-between items-center">
+                    <Button type="submit" className="flex items-center gap-2">
+                      <Send className="w-4 h-4" />
+                      Send Message
+                    </Button>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button className="bg-primary text-black hover:bg-primary/90 font-medium">
+                          Download Resume
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuItem asChild>
+                          <a href="/Resume_MAY2025(WEB).pdf" download target="_blank" rel="noopener noreferrer">
+                            Web Role
+                          </a>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <a href="/Resume_MAY2025(DS).pdf" download target="_blank" rel="noopener noreferrer">
+                            Data Science Role
+                          </a>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <a href="/Resume_MAY2025.pdf" download target="_blank" rel="noopener noreferrer">
+                            Other Roles
+                          </a>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
                 </form>
               </CardContent>
             </Card>
