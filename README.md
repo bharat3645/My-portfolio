@@ -1,5 +1,7 @@
 # Portfolio Pro 3D
 
+> **Note:** This was an earlier portfolio build. My current, actively developed portfolio is **[3D-Portfolio-Website](https://github.com/bharat3645/3D-Portfolio-Website)**, live at **[bharat3645.vercel.app](https://bharat3645.vercel.app)**. This repo is kept for reference — the live demo linked below still runs an older version of my profile.
+
 A visually stunning, interactive, and AI-powered portfolio website built with Next.js, React, and Three.js. This project is designed to help you showcase your skills, projects, and experience in a modern, engaging way—even if you are a complete beginner.
 
 ---
@@ -179,4 +181,3 @@ See [`docs/blueprint.md`](docs/blueprint.md) for more.
 - [GitHub](https://github.com/bharat3645)
 - [LinkedIn](https://www.linkedin.com/in/bharat-singh-parihar/)
 - Email: bharat3645@gmail.com
-
