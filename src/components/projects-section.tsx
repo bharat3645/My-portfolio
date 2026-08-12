@@ -46,12 +46,12 @@ const projects = [
   {
     title: "NeuroOCR",
     description:
-      "A TensorFlow.js-based OCR engine for handwriting recognition, featuring real-time image processing and a modern UI built with React and Tailwind CSS.",
+      "An offline handwriting-OCR engine powered by a custom-trained TensorFlow.js CNN, running as a React + TypeScript SPA with fully client-side inference — no server, no uploads.",
     imageUrl: "https://picsum.photos/seed/neuroocr/600/400",
     imageHint: "handwriting OCR interface",
     liveUrl: null,
-    repoUrl: "https://github.com/bharat3645/NeuroOCR1",
-    tags: ["TensorFlow.js", "React", "TypeScript", "Tailwind CSS"],
+    repoUrl: "https://github.com/bharat3645/NeuroOCR",
+    tags: ["TensorFlow.js", "React", "TypeScript", "CNN", "Offline-First"],
   },
   {
     title: "ChainFusion",
@@ -94,24 +94,134 @@ const projects = [
     tags: ["Blockchain", "Healthcare", "Data Security"],
   },
   {
-    title: "ETS (E-Ticketing System)",
+    title: "Event Ticketing System",
     description:
-      "E-Ticketing System using React, Node.js, and MongoDB to manage event tickets and user accounts.",
+      "A JWT-authenticated event ticketing platform with QR-code ticket generation, spanning a multi-framework frontend (React micro-apps plus a Vue widget) over an Express backend.",
     imageUrl: "https://picsum.photos/seed/ets/600/400",
     imageHint: "e-ticketing system",
     liveUrl: null,
-    repoUrl: "https://github.com/bharat3645/ETS",
-    tags: ["React", "Node.js", "MongoDB", "Authentication", "Event Management"],
+    repoUrl: "https://github.com/bharat3645/Event-Ticketing-System",
+    tags: ["React", "Vue", "Express", "JWT", "QR Code"],
   },
   {
-    title: "DreamCanvas",
+    title: "AnyBrush",
     description:
-      "AI-powered generative art platform that converts text descriptions into personalized visual art using Stable Diffusion models.",
-    imageUrl: "https://picsum.photos/seed/dreamcanvas/600/400",
-    imageHint: "ai art generator from text",
+      "A multi-modal, accessibility-first AI-art creative studio — eye-tracking, voice commands, and single-switch control alongside freehand drawing, with a persistent gallery of generated work.",
+    imageUrl: "https://picsum.photos/seed/anybrush/600/400",
+    imageHint: "accessible ai art creative studio",
     liveUrl: null,
-    repoUrl: "https://github.com/bharat3645/DreamCanvas",
-    tags: ["AI Art", "Text-to-Image", "Generative Models"],
+    repoUrl: "https://github.com/bharat3645/AnyBrush",
+    tags: ["Next.js", "React", "TypeScript", "AI Art", "Accessibility"],
+  },
+  {
+    title: "ChainCritters",
+    description:
+      "An on-chain trading card game built with Solidity and Foundry — mint, trade, and battle blockchain critters, with real-time updates over WebSockets.",
+    imageUrl: "https://picsum.photos/seed/chaincritters/600/400",
+    imageHint: "on-chain trading card game",
+    liveUrl: null,
+    repoUrl: "https://github.com/bharat3645/ChainCritters",
+    tags: ["Solidity", "Foundry", "NFT", "Web3", "WebSockets"],
+  },
+  {
+    title: "Fire Detection",
+    description:
+      "A Keras CNN that detects fire in satellite and aerial imagery with Grad-CAM explainability, exposed through a Streamlit UI, a FastAPI REST endpoint, and a CLI.",
+    imageUrl: "https://picsum.photos/seed/fire-detection/600/400",
+    imageHint: "fire detection from satellite imagery",
+    liveUrl: null,
+    repoUrl: "https://github.com/bharat3645/fire_detection",
+    tags: ["TensorFlow", "CNN", "Grad-CAM", "FastAPI", "Streamlit"],
+  },
+  {
+    title: "FireSat AI",
+    description:
+      "A hybrid CNN-LSTM + attention model forecasting wildfire risk across Alaska from Sentinel-1/2, Landsat, MODIS, and ERA5 data, built GSoC-MVP style.",
+    imageUrl: "https://picsum.photos/seed/firesat-ai/600/400",
+    imageHint: "wildfire risk forecasting from satellite data",
+    liveUrl: null,
+    repoUrl: "https://github.com/bharat3645/firesat-ai",
+    tags: ["PyTorch", "CNN-LSTM", "Remote Sensing", "Climate Tech", "Geospatial"],
+  },
+  {
+    title: "OpenCV Object Detection Suite",
+    description:
+      "A curated suite of three OpenCV object-detection demos: a MobileNet-SSD webcam script, a Flask + YOLOv3 browser streaming app, and a YOLOv3 CLI tool.",
+    imageUrl: "https://picsum.photos/seed/opencv-detection/600/400",
+    imageHint: "opencv object detection demos",
+    liveUrl: null,
+    repoUrl: "https://github.com/bharat3645/opencv-object-detection-suite",
+    tags: ["OpenCV", "YOLOv3", "MobileNet-SSD", "Flask", "Python"],
+  },
+  {
+    title: "Automation AI",
+    description:
+      "A node-based workflow automation platform with a FastAPI backend, natural-language-to-workflow generation, cron scheduling, and webhook triggers.",
+    imageUrl: "https://picsum.photos/seed/automation-ai/600/400",
+    imageHint: "no-code workflow automation platform",
+    liveUrl: null,
+    repoUrl: "https://github.com/bharat3645/Automation-AI",
+    tags: ["FastAPI", "Workflow Automation", "No-Code", "Python"],
+  },
+  {
+    title: "Velmora",
+    description:
+      "A cross-chain NFT gaming platform — mint generative NFTs, battle and trade in a real-time 2D multiplayer world, and earn soulbound achievement tokens.",
+    imageUrl: "https://picsum.photos/seed/velmora/600/400",
+    imageHint: "cross-chain nft gaming platform",
+    liveUrl: null,
+    repoUrl: "https://github.com/bharat3645/Velmora",
+    tags: ["Solidity", "Next.js", "Phaser", "Socket.io", "Web3"],
+  },
+  {
+    title: "Backend Builder",
+    description:
+      "A code-generation platform that turns a natural-language prompt or DSL spec into a runnable Django+DRF, Go Fiber+GORM, or Ruby on Rails backend project, via web UI, CLI, and REST API.",
+    imageUrl: "https://picsum.photos/seed/backend-builder/600/400",
+    imageHint: "ai backend code generation platform",
+    liveUrl: null,
+    repoUrl: "https://github.com/bharat3645/Backend-Builder",
+    tags: ["Django", "Go Fiber", "Ruby on Rails", "React", "Code Generation"],
+  },
+  {
+    title: "ScribeLens",
+    description:
+      "A browser-based handwritten text OCR tool built with React, TypeScript, and Tesseract.js — runs entirely client-side with no server required.",
+    imageUrl: "https://picsum.photos/seed/scribelens/600/400",
+    imageHint: "browser based handwriting ocr",
+    liveUrl: null,
+    repoUrl: "https://github.com/bharat3645/ScribeLens",
+    tags: ["React", "TypeScript", "Tesseract.js", "OCR", "Accessibility"],
+  },
+  {
+    title: "CyberHack",
+    description:
+      "A dark-web OSINT and forensics-triage toolkit — a Tor crawler, an image/file evidence pipeline, wallet and anomaly analysis, and Markdown/PDF case reports, with a Streamlit dashboard and Docker Compose stack.",
+    imageUrl: "https://picsum.photos/seed/cyberhack/600/400",
+    imageHint: "osint dark web forensics toolkit",
+    liveUrl: null,
+    repoUrl: "https://github.com/bharat3645/CyberHack",
+    tags: ["OSINT", "Tor", "Python", "Docker", "Digital Forensics"],
+  },
+  {
+    title: "Image Captioning",
+    description:
+      "A CNN-encoder + LSTM-decoder image captioning model trained on MS COCO (PyTorch), with beam search decoding, a Gradio demo, Docker packaging, and CI.",
+    imageUrl: "https://picsum.photos/seed/image-captioning/600/400",
+    imageHint: "cnn lstm image captioning demo",
+    liveUrl: null,
+    repoUrl: "https://github.com/bharat3645/Image-Captioning",
+    tags: ["PyTorch", "CNN", "RNN", "NLP", "Gradio"],
+  },
+  {
+    title: "Computer Vision Nanodegree",
+    description:
+      "Udacity Computer Vision Nanodegree coursework covering facial keypoint detection, image captioning, and landmark detection/SLAM, built with PyTorch.",
+    imageUrl: "https://picsum.photos/seed/cv-nanodegree/600/400",
+    imageHint: "computer vision coursework projects",
+    liveUrl: null,
+    repoUrl: "https://github.com/bharat3645/Computer-Vision-Nanodegree",
+    tags: ["PyTorch", "Computer Vision", "Coursework", "Deep Learning"],
   },
   {
     title: "Federated Learning for Anomaly Detection",
