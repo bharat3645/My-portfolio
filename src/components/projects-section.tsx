@@ -204,6 +204,16 @@ const projects = [
     tags: ["OSINT", "Tor", "Python", "Docker", "Digital Forensics"],
   },
   {
+    title: "Farda AI Assistant",
+    description:
+      "A frameless, always-on-top floating AI assistant for Windows — real screen vision via OpenAI's multimodal API, live-editable settings, non-blocking background requests, and a system-tray presence.",
+    imageUrl: "https://picsum.photos/seed/farda-ai/600/400",
+    imageHint: "floating desktop ai assistant windows",
+    liveUrl: null,
+    repoUrl: "https://github.com/bharat3645/Farda-2.0",
+    tags: ["PyQt5", "OpenAI", "Python", "Windows", "Desktop App"],
+  },
+  {
     title: "Image Captioning",
     description:
       "A CNN-encoder + LSTM-decoder image captioning model trained on MS COCO (PyTorch), with beam search decoding, a Gradio demo, Docker packaging, and CI.",
